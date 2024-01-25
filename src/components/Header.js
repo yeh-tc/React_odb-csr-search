@@ -12,8 +12,7 @@ export default function Header(){
           position: "fixed",
           top: 0,
           width: "100vw",
-          zIndex: 99995,
-          p: 1,
+          py:1.5,
           borderBottom: "1px solid",
           borderColor: "#E4E4E4",
         }}
@@ -24,12 +23,12 @@ export default function Header(){
           alignItems: "center",
           maxWidth:'1400px',
           margin:'0 auto',
-          px: { sm: 2, lg: 3 } }}>
-          <Avatar alt="Logo" src={ODBlogo} />
+          px: { xs:2, sm: 2.5,md:3, lg: 3.5 } }}>
+          <Avatar alt="Logo" src={ODBlogo} sx={{ width: 34, height: 34 }}/>
           <Button
-            size="sm"
+            size="small"
             variant="outlined"
-            startDecorator={<SearchIcon />}
+            startIcon={<SearchIcon />}
             sx={{
               color: "#534D59",
               border: "2px solid #2789E3",

@@ -1,6 +1,28 @@
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import Header from './components/Header';
+import { createBrowserRouter, RouterProvider,} from "react-router-dom";
+
+import Home from './pages/Home';
+import Info from './pages/Info';
+import Search from './pages/Search';
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    children: [
+      {
+        index: true,
+        element: <Search />,
+      },
+      {
+        path: "csr/:csrId",
+        element: <Info />,
+      },
+    ],
+  },
+]);
+
 
 let theme = createTheme({
   typography: {
@@ -15,13 +37,14 @@ let theme = createTheme({
       '"Segoe UI Symbol"',
     ].join(','),
   },
+
+  
 });
 theme = responsiveFontSizes(theme);
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Header/>
-      
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
