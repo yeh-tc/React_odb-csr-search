@@ -1,5 +1,5 @@
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
-import { createBrowserRouter, RouterProvider,} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Home from './pages/Home';
@@ -20,6 +20,10 @@ const router = createBrowserRouter([
         path: "csr/:csrId",
         element: <Info />,
       },
+      {
+        path: "*", 
+        element: <Navigate to="/" replace /> 
+      }
     ],
   },
 ]);
