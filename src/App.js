@@ -1,11 +1,12 @@
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import { createBrowserRouter, RouterProvider,} from "react-router-dom";
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Home from './pages/Home';
 import Info from './pages/Info';
 import Search from './pages/Search';
 
-
+const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,15 +38,24 @@ let theme = createTheme({
       '"Segoe UI Symbol"',
     ].join(','),
   },
+  palette: {
+    primary: {
 
+      main: '#2789E3',
+    },
+
+  },
   
+
 });
 theme = responsiveFontSizes(theme);
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} />
     </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 

@@ -15,6 +15,8 @@ export default function Header(){
           py:1.5,
           borderBottom: "1px solid",
           borderColor: "#E4E4E4",
+          backgroundColor:'#FFFFFF',
+          zIndex:9999
         }}
       >
         <Box sx={{
@@ -23,7 +25,7 @@ export default function Header(){
           alignItems: "center",
           maxWidth:'1400px',
           margin:'0 auto',
-          px: { xs:2, sm: 2.5,md:3, lg: 3.5 } }}>
+          px: { xs: 2, md: 6  } }}>
           <Avatar alt="Logo" src={ODBlogo} sx={{ width: 34, height: 34 }}/>
           <Button
             size="small"

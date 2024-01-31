@@ -10,7 +10,7 @@ export default function Body({children}){
              md: '59px',
            },
            maxWidth:'1400px',
-           px: { xs:2, sm: 2.5,md:3, lg: 3.5 },
+           px: { xs: 2, md: 6},
            py:4
            }}>
             {children}
