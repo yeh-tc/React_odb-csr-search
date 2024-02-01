@@ -21,7 +21,7 @@ import AppendTable from "./AppendTable";
 import Avatar from "@mui/material/Avatar";
 import InfoForm from "./InfoForm";
 import NTUlogo from "../assets/NTU.gif";
-import SYUlogo from "../assets/SYU.svg";
+import SYUlogo from "../assets/SYU.png";
 import NKUSTlogo from "../assets/NKUST.png";
 import NKNUlogo from "../assets/NKNU.png";
 import marinelogo from "../assets/marine.png";
@@ -29,6 +29,10 @@ import NTOUlogo from "../assets/ntoulogo.gif";
 import Sinicalogo from "../assets/sinica.png";
 import NCKUlogo from "../assets/ncku.png";
 import NTNUlogo from "../assets/NTNU.png";
+import NAMRlogo from "../assets/NAMR.svg"
+import DWUlogo from "../assets/DWU.jpg"
+import NTUElogo from "../assets/NTUE.png"
+import cwalogo from "../assets/cwa.svg"
 import RenderError from "./RenderError";
 
 
@@ -64,7 +68,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
     isLoading,
     isError,
   } = useCruiseInfo(shipName, cruiseID);
-
+  
   if (isLoading) {
     return <RenderError/>;
   }
@@ -161,7 +165,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                 }}
               >
                 <InfoForm
-                  text={"航行浬程(海浬)"}
+                  text={"航行浬程 (海浬)"}
                   info={cruiseData[0].CruiseBasicData.TotalDistance}
                 />
                 <InfoForm
@@ -181,7 +185,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                   info={cruiseData[0].CruiseBasicData.DurationHours}
                 />
                 <InfoForm
-                  text={"離岸最遠(海浬)"}
+                  text={"離岸最遠 (海浬)"}
                   info={cruiseData[0].CruiseBasicData.FarestDistance}
                 />
               </Box>
@@ -194,7 +198,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
               }}
             >
               <InfoForm
-                text={"出港日期(UTC+8)"}
+                text={"出港日期 (UTC+8)"}
                 info={formatDateAndTime(
                   cruiseData[0].CruiseBasicData.StartDate
                 )}
@@ -212,7 +216,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
               }}
             >
               <InfoForm
-                text={"進港日期(UTC+8)"}
+                text={"進港日期 (UTC+8)"}
                 info={formatDateAndTime(cruiseData[0].CruiseBasicData.EndDate)}
               />
               <InfoForm
@@ -231,7 +235,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
               />
             
             <InfoForm
-              text={"備註"}
+              text={"備註 (作業狀況說明及建議事項)"}
               info={cruiseData[0].CruiseBasicData.Remark}
             />
           </Box>
@@ -242,7 +246,9 @@ export default function CruiseInfo({ shipName, cruiseID }) {
               參與人員
             </Typography>
           </Box>
+          {cruiseData[0].Participants.Department.some(dept => dept.trim() !== '')  &&(
           <Box>
+            
             <List>
               {cruiseData[0].Participants.Department.map(
                 (department, index) => (
@@ -255,6 +261,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                           alt={department}
                           src={
                             department === "台大" ||
+                            department === "臺大" ||
                             department === "國立臺灣大學"
                               ? NTUlogo
                               : department === "中山" ||
@@ -269,6 +276,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                                 department === "海軍軍官學校"
                               ? marinelogo
                               : department === "海大" ||
+                                department === "海洋大學" ||
                                 department === "國立臺灣海洋大學"
                               ? NTOUlogo
                               : department === "中研院" ||
@@ -278,11 +286,23 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                                 department === "國立成功大學"
                               ? NCKUlogo
                               : department === "師大" ||
-                                department === "國立師範大學"
+                                department === "國立師範大學" ||
+                                department === "師範大學" ||
+                                department === "台師大"
                               ? NTNUlogo
+                              : department === "國海院" ||
+                                department === "國家海洋研究院"
+                              ? NAMRlogo
+                              : department === "東吳大學"||
+                                department === "東吳"
+                              ? DWUlogo
+                              : department === "北教大"
+                              ? NTUElogo
+                              : department === "中央氣象局"
+                              ? cwalogo
                               : undefined
                           }
-                        />
+                        >{department ? department.charAt(0) : "?"}</Avatar>
                       </ListItemAvatar>
                       <ListItemText
                         primary={department}
@@ -306,7 +326,9 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                 )
               )}
             </List>
-          </Box>
+          
+          </Box>)
+        }
         </Paper>
         <Paper variant="outlined" sx={{ backgroundColor: "#F8FaFC" }}>
           <Box sx={{ mb: 1, px: 2, py: 2 }}>
@@ -317,7 +339,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
               <Paper sx={{ width: "100%", mb: 2,mt:5}} elevation={1}>
                 <Typography
                   variant="h6"
-                  sx={{ fontWeight: 500, color: "#474747",px:2,py:2 }}
+                  sx={{ fontWeight: 500, color: "#003566",px:2,py:2 }}
                 >
                   沿航線資料
                 </Typography>
@@ -325,8 +347,8 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell >儀器</TableCell>
-                        <TableCell align="center">數量</TableCell>
+                        <TableCell>沿航線資料</TableCell>
+                        <TableCell align="center">採集樣品</TableCell>
                         <TableCell sx={{ width: 300}} align="center">樣品持有人</TableCell>
                       </TableRow>
                     </TableHead>
@@ -345,12 +367,21 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                           {item==='都普勒流剖儀ADCP 75-kHz' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' : 
                            item==='單音束測深儀EK-80' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
                            item==='單音束測深儀EA-640' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='多音束測深儀EM2040' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
                            item==='多音束測深儀EM304' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='多音束測深儀' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='船艏氣象儀' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='都普勒流剖儀ADCP 150-kHz' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
                            item==='底質剖面儀Edgetech3300' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
                            item==='X波段雷達波浪儀' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='多音束測深儀EM2040' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
                            
+                           item==='多音束測深儀EM712' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='底質剖面儀Bathy2000' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='單音束測深儀EK-500,GPS' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='都普勒流剖儀ADCP' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='掃描式聲納' ? cruiseData[0].CruiseData.CollectionNum[index]+' 站' :
                            item==='航行紀錄資料' ? cruiseData[0].CruiseData.CollectionNum[index]+' 時' :
+
 
                             cruiseData[0].CruiseData.CollectionNum[index]}
                           </TableCell>
@@ -365,25 +396,25 @@ export default function CruiseInfo({ shipName, cruiseID }) {
               </Paper>
             )}
             {cruiseData[0].Physical &&(
-              <AppendTable title={'Physical'} data={cruiseData[0].Physical}/>
+              <AppendTable title={'物理作業'} data={cruiseData[0].Physical}/>
             )}
             {cruiseData[0].Biogeochemical &&(
-              <AppendTable title={'Biogeochemical'} data={cruiseData[0].Biogeochemical}/>
+              <AppendTable title={'生地化作業'} data={cruiseData[0].Biogeochemical}/>
             )}
             {cruiseData[0].Biology &&(
-              <AppendTable title={'Biology'} data={cruiseData[0].Biology}/>
+              <AppendTable title={'生物作業'} data={cruiseData[0].Biology}/>
             )}
             {cruiseData[0].Geology &&(
-              <AppendTable title={'Geology'} data={cruiseData[0].Geology}/>
+              <AppendTable title={'地質作業'} data={cruiseData[0].Geology}/>
             )}
             {cruiseData[0].Geophysics &&(
-              <AppendTable title={'Geophysics'} data={cruiseData[0].Geophysics}/>
+              <AppendTable title={'地物作業'} data={cruiseData[0].Geophysics}/>
             )}
             {cruiseData[0].Atmospher &&(
-              <AppendTable title={'Atmosphere'} data={cruiseData[0].Atmospher}/>
+              <AppendTable title={'大氣作業'} data={cruiseData[0].Atmospher}/>
             )}
             {cruiseData[0].Other &&(
-              <AppendTable title={'其他'} data={cruiseData[0].Other}/>
+              <AppendTable title={'其他作業'} data={cruiseData[0].Other}/>
             )}
           </Box>
         </Paper>

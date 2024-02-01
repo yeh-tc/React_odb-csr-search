@@ -1,10 +1,6 @@
 import Box from '@mui/material/Box';
-
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import SearchIcon from "@mui/icons-material/Search";
 import ODBlogo from "../assets/ODB.png";
-
 export default function Header(){
     return(
         <Box

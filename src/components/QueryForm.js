@@ -95,6 +95,7 @@ function useCruiseData(ship, cruiseid, leader, date1, date2, canFetch) {
       const response = await fetch(
         `https://api.odb.ntu.edu.tw/cruise/csrqry?ship=${ship}&crid=${cruiseid}&leader=${leader}&start=${date1}&end=${date2}&append=`
       );
+      
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -148,6 +149,7 @@ export default function QueryForm() {
   useEffect(() => {
     const url = `https://api.odb.ntu.edu.tw/cruise/csrqry?ship=${ship.join(',')}&crid=${cruiseid}&leader=${leader}&start=${date1}&end=${date2}&append=&format=csv`;
     setDownloadUrl(url);
+    
   }, [ship, cruiseid, leader, date1, date2]);
 
 
