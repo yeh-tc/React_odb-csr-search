@@ -16,7 +16,13 @@ const columns = [
     headerClassName: 'super-app-theme--header',
     renderCell: (params) => {
         return (
-          <Link to={`/csr/${params.value}`} style={{ color: "#2789E3" }}>
+          <Link 
+          to={`/csr/${params.value}`}
+          onClick={(e) => {
+            e.preventDefault();
+            window.open(`/csr/${params.value}`, '_blank');
+          }}
+          style={{ color: "#2789E3" }}>
             {params.value}
           </Link>
         );

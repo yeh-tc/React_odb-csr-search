@@ -1,10 +1,12 @@
 import React from "react";
 import { useQuery } from "react-query";
 import Box from "@mui/material/Box";
+import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import { Link } from 'react-router-dom';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -19,6 +21,7 @@ import TableRow from "@mui/material/TableRow";
 import AppendTable from "./AppendTable";
 
 import Avatar from "@mui/material/Avatar";
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import InfoForm from "./InfoForm";
 import NTUlogo from "../assets/NTU.gif";
 import SYUlogo from "../assets/SYU.png";
@@ -347,9 +350,9 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell>沿航線資料</TableCell>
+                        <TableCell sx={{ width: 250}}>沿航線資料</TableCell>
                         <TableCell align="center">採集樣品</TableCell>
-                        <TableCell sx={{ width: 300}} align="center">樣品持有人</TableCell>
+                        <TableCell align="center">樣品持有人</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>

@@ -25,9 +25,9 @@ export default function AppendTable({ title, data }) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>作業項目</TableCell>
+              <TableCell sx={{ width: 250}}>作業項目</TableCell>
               <TableCell align="center">採集樣品</TableCell>
-              <TableCell sx={{ width: 300 }} align="center">
+              <TableCell align="center">
                 樣品持有人
               </TableCell>
             </TableRow>
