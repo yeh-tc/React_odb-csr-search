@@ -27,20 +27,7 @@ export default function Header(){
           margin:'0 auto',
           px: { xs: 2, md: 6  } }}>
           <Avatar alt="Logo" src={ODBlogo} sx={{ width: 34, height: 34 }}/>
-          <Button
-            size="small"
-            variant="outlined"
-            startIcon={<SearchIcon />}
-            sx={{
-              color: "#534D59",
-              border: "2px solid #2789E3",
-              backgroundColor: "#F9FAFC",
-              pointerEvents: "none",
-            }}
-          >
-            <span>CSR Search...</span>
-            <span style={{ color: "#2789E3" }}>|</span>
-          </Button>
+
         </Box>
       </Box>
     );

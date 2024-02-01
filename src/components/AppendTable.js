@@ -20,7 +20,7 @@ export default function AppendTable({title, data}){
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell >儀器</TableCell>
+                        <TableCell sx={{ width: 200}}>儀器</TableCell>
                         <TableCell align="center">單位1</TableCell>
                         <TableCell align="center">單位2</TableCell>
                         <TableCell sx={{ width: 300}} align="center">樣品持有人</TableCell>
@@ -38,10 +38,33 @@ export default function AppendTable({title, data}){
                             {item}
                           </TableCell>
                           <TableCell align="center" sx={{color: "#474747"}}>
-                            {item==='CTD' ? data.Summary1[index]+'站' : data.Summary1[index]}
+                            {item==='CTD' ? data.Summary1[index]+' 站' : 
+                             item==='Seaglider' ? data.Summary1[index]+' 站' :
+                             item==='EM-APEX float' ? data.Summary1[index]+' 站' :
+                             item==='Plankton net' ? data.Summary1[index]+' 站' :
+                             item==='Lander' ? data.Summary1[index]+' 站' :
+                             item==='Multi-core' ? data.Summary1[index]+' 站' :
+                             item==='Box-core' ? data.Summary1[index]+' 站' :
+                             item==='Gravity-core' ? data.Summary1[index]+' 站' :
+                             item==='LADCP' ? data.Summary1[index]+' 站' :
+                             item==='Turbulence profiling (VMP250)' ? data.Summary1[index]+' 站' :
+                             item==='Shipek Grab' ? data.Summary1[index]+' 站' :
+                             item==='Mooring' ? data.Summary1[index]+' 站' :
+                            data.Summary1[index]}
                           </TableCell>
                           <TableCell align="center" sx={{color: "#474747"}}>
-                          {item==='CTD' ? data.Summary2[index]+'次' : data.Summary2[index]}
+                          {item==='CTD' ? data.Summary2[index]+' 次' : 
+                           item==='Seaglider' ? data.Summary2[index]+' 次' : 
+                           item==='EM-APEX float' ? data.Summary2[index]+' 次' :
+                           item==='Plankton net' ? data.Summary2[index]+' 次' :
+                           item==='Lander' ? data.Summary2[index]+' 次' :
+                           item==='Multi-core' ? data.Summary2[index]+' 次' :
+                           item==='Box-core' ? data.Summary2[index]+' 次' :
+                           item==='Gravity-core' ? data.Summary2[index]+' 次' :
+                           item==='LADCP' ? data.Summary2[index]+' 次' :
+                           item==='Turbulence profiling (VMP250)' ? data.Summary2[index]+' 次' :
+                           item==='Shipek Grab' ? data.Summary2[index]+' 次' :
+                           data.Summary2[index]}
                           </TableCell>
                           <TableCell align="center" sx={{color: "#474747"}}>
                             {data.DataOwner[index]}

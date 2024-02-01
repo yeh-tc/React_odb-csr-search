@@ -27,6 +27,8 @@ import NKNUlogo from "../assets/NKNU.png";
 import marinelogo from "../assets/marine.png";
 import NTOUlogo from "../assets/ntoulogo.gif";
 import Sinicalogo from "../assets/sinica.png";
+import NCKUlogo from "../assets/ncku.png";
+import NTNUlogo from "../assets/NTNU.png";
 import RenderError from "./RenderError";
 
 
@@ -80,7 +82,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
 
   // Render the actual content if data is available...
 
-
+ 
   return (
     <Box>
       <Typography variant="h5" sx={{ fontWeight: 500, color: "##71A1C" }}>
@@ -218,13 +220,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                 info={cruiseData[0].CruiseBasicData.EndPort}
               />
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                gap: 3,
-                flexDirection: { xs: "column", sm: "row" },
-              }}
-            >
+
               <InfoForm
                 text={"計畫名稱"}
                 info={cruiseData[0].CruiseBasicData.PlanName}
@@ -233,7 +229,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                 text={"探測人員"}
                 info={cruiseData[0].CruiseBasicData.Technician}
               />
-            </Box>
+            
             <InfoForm
               text={"備註"}
               info={cruiseData[0].CruiseBasicData.Remark}
@@ -278,6 +274,12 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                               : department === "中研院" ||
                                 department === "中央研究院"
                               ? Sinicalogo
+                              : department === "成大" ||
+                                department === "國立成功大學"
+                              ? NCKUlogo
+                              : department === "師大" ||
+                                department === "國立師範大學"
+                              ? NTNUlogo
                               : undefined
                           }
                         />
@@ -317,7 +319,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                   variant="h6"
                   sx={{ fontWeight: 500, color: "#474747",px:2,py:2 }}
                 >
-                  CruiseData
+                  沿航線資料
                 </Typography>
                 <TableContainer>
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -340,7 +342,17 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                             {item}
                           </TableCell>
                           <TableCell align="center" sx={{color: "#474747"}}>
-                            {cruiseData[0].CruiseData.CollectionNum[index]}
+                          {item==='都普勒流剖儀ADCP 75-kHz' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' : 
+                           item==='單音束測深儀EK-80' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='單音束測深儀EA-640' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='多音束測深儀EM304' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='底質剖面儀Edgetech3300' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='X波段雷達波浪儀' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           item==='多音束測深儀EM2040' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
+                           
+                           item==='航行紀錄資料' ? cruiseData[0].CruiseData.CollectionNum[index]+' 時' :
+
+                            cruiseData[0].CruiseData.CollectionNum[index]}
                           </TableCell>
                           <TableCell align="center" sx={{color: "#474747"}}>
                             {cruiseData[0].CruiseData.CollectionOwner[index]}
@@ -357,6 +369,9 @@ export default function CruiseInfo({ shipName, cruiseID }) {
             )}
             {cruiseData[0].Biogeochemical &&(
               <AppendTable title={'Biogeochemical'} data={cruiseData[0].Biogeochemical}/>
+            )}
+            {cruiseData[0].Biology &&(
+              <AppendTable title={'Biology'} data={cruiseData[0].Biology}/>
             )}
             {cruiseData[0].Geology &&(
               <AppendTable title={'Geology'} data={cruiseData[0].Geology}/>
