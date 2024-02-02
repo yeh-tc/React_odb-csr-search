@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import ODBlogo from "../assets/ODB.png";
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { Link } from 'react-router-dom';
@@ -13,7 +12,7 @@ export default function Header(){
           position: "fixed",
           top: 0,
           width: "100vw",
-          py:1.5,
+          py:1,
           borderBottom: "1px solid",
           borderColor: "#E4E4E4",
           backgroundColor:'#FFFFFF',
@@ -29,10 +28,10 @@ export default function Header(){
           margin:'0 auto',
           px: { xs: 2, md: 6  } }}>
             
-          <a href='https://www.odb.ntu.edu.tw/' target="_blank"><Avatar alt="Logo" src={ODBlogo} sx={{ width: 34, height: 34 }}/></a>
+          <a href='https://www.odb.ntu.edu.tw/' target="_blank" rel="noreferrer"><Avatar alt="Logo" src={ODBlogo} sx={{ width: 34, height: 34 }}/></a>
           
           <Link to={`/`}>
-          <IconButton aria-label="delete" sx={{color:'#2789E3'}}>
+          <IconButton aria-label="delete" sx={{color:'#2789E3', marginRight:2}}>
           
              <HomeRoundedIcon />
           

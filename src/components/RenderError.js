@@ -3,8 +3,9 @@ import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Skeleton from '@mui/material/Skeleton';
+import LinearProgress from "@mui/material/LinearProgress";
 
-export default function RenderError(){
+export default function RenderError({progess}){
     return(
         
         <Stack
@@ -17,7 +18,10 @@ export default function RenderError(){
           py: { xs: 2, sm: 4, md: 5 },
         }}
       >
+        
       <Paper variant="outlined" sx={{ backgroundColor: "#F8FaFC" }}>
+        {progess && <LinearProgress />}
+      
           <Box sx={{ mb: 1, px: 2, py: 2 }}>
             <Typography variant="h6" sx={{ fontWeight: 500, color: "#2789E3" }}>
               航次資訊

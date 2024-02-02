@@ -15,6 +15,7 @@ import CruiseEquiTable from "./CruiseEquiTable";
 import Avatar from "@mui/material/Avatar";
 import InfoForm from "./InfoForm";
 
+
 import NTUlogo from "../assets/NTU.gif";
 import SYUlogo from "../assets/SYU.png";
 import NKUSTlogo from "../assets/NKUST.png";
@@ -28,6 +29,7 @@ import NAMRlogo from "../assets/NAMR.svg"
 import DWUlogo from "../assets/DWU.jpg"
 import NTUElogo from "../assets/NTUE.png"
 import cwalogo from "../assets/cwa.svg"
+import MElogo from "../assets/ME.png"
 
 
 
@@ -65,7 +67,13 @@ export default function CruiseInfo({ shipName, cruiseID }) {
   } = useCruiseInfo(shipName, cruiseID);
   
   if (isLoading) {
-    return <RenderError/>;
+    return (
+      <Box>
+        <Typography variant="h5" sx={{ fontWeight: 500, color: "#474747", mb: 2 }}>
+          Loading...
+        </Typography>
+        <RenderError progess/>
+    </Box>);
   }
 
   if (isError || cruiseData.length === 0) {
@@ -139,12 +147,13 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                 text={"領隊教授"}
                 info={cruiseData[0].CruiseBasicData.LeaderName}
               />
-              <InfoForm
+              
+            </Box>
+            <InfoForm
                 text={"探測海域"}
                 info={cruiseData[0].CruiseBasicData.ExploreOcean}
                 sx={{ flexBasis: { sm: "100%", md: 0, lg: 0 } }}
               />
-            </Box>
             <Box
               sx={{
                 display: "flex",
@@ -257,6 +266,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                           src={
                             department === "台大" ||
                             department === "臺大" ||
+                            department === "台灣大學" ||
                             department === "國立臺灣大學"
                               ? NTUlogo
                               : department === "中山" ||
@@ -278,6 +288,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                                 department === "中央研究院"
                               ? Sinicalogo
                               : department === "成大" ||
+                                department === "成功大學" ||
                                 department === "國立成功大學"
                               ? NCKUlogo
                               : department === "師大" ||
@@ -295,6 +306,9 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                               ? NTUElogo
                               : department === "中央氣象局"
                               ? cwalogo
+                              : department === "環保署" ||
+                                department === "環境部"
+                              ? MElogo
                               : undefined
                           }
                         >{department ? department.charAt(0) : "?"}</Avatar>

@@ -14,18 +14,42 @@ import Divider from "@mui/material/Divider";
 import FaceIcon from "@mui/icons-material/Face";
 
 export default function AppendTable({ title, data }) {
+  // Function to handle conditional logic
+  const renderSummary = (item, index) => {
+    if (title === "其他作業") {
+      return `${data.Summary1[index]} ${data.Summary2[index]}`;
+    } else if (data.Summary2[index] === "站") {
+      return `${data.Summary1[index]} ${data.Summary2[index]}`;
+    } else {
+      // List of equipment needing special handling
+      const specialEquipment = [
+        "CTD", "TM-CTD", "Seaglider", "EM-APEX float", "Plankton net",
+        "Sediment Trap", "Water sampling (bottle)", "Big trawling", "Trawling",
+        "Lander", "Multi-core", "Box-core", "Piston-core", "Dredge",
+        "Gravity-core", "Smith-core", "Reflection profiling", "LADCP",
+        "Towed instrument", "Turbulence profiling (VMP250)", "Turbulence profiling (VMP500)",
+        "UCTD", "Sonde", "Drifter", "Shipek Grab", "Bottom trawling", "XBT",
+        "拋棄式溫深儀(XBT)", "自記式紊流量測模組(Microrider)"
+      ];
+
+      if (specialEquipment.includes(item)) {
+        return `${data.Summary1[index]} 站 ${data.Summary2[index]} 次`;
+      } else if (item === "Mooring" && data.Summary2[index] === "") {
+        return `${data.Summary1[index]} 站`;
+      } else if (item.includes("Side scan (towed)") && data.Summary2[index] === "") {
+        return `${data.Summary1[index]} 海浬`;
+      } else if (item === "LiDAR" && data.Summary2[index] === "") {
+        return `${data.Summary1[index]} 海浬`;
+      } else {
+        return `${data.Summary1[index]} ${data.Summary2[index]}`;
+      }
+    }
+  };
+
   return (
     <>
       <Paper sx={{ width: "100%", mb: 2, mt: 5 }} elevation={1}>
-        <Typography
-          variant="h6"
-          sx={{
-            fontWeight: 500,
-            color: "#003566",
-            px: 2,
-            py: 2,
-          }}
-        >
+        <Typography variant="h6" sx={{ fontWeight: 500, color: "#003566", px: 2, py: 2 }}>
           {title}
         </Typography>
         <TableContainer sx={{ display: { xs: "none", md: "block" } }}>
@@ -39,69 +63,13 @@ export default function AppendTable({ title, data }) {
             </TableHead>
             <TableBody>
               {data.Equipment.map((item, index) => (
-                <TableRow
-                  key={item}
-                  sx={{
-                    "&:last-child td, &:last-child th": { border: 0 },
-                  }}
-                >
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    sx={{ color: "#474747" }}
-                  >
+                <TableRow key={item + index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                  <TableCell component="th" scope="row" sx={{ color: "#474747" }}>
                     {item}
                   </TableCell>
-                  {title === "其他作業" ? (
-                    <TableCell align="center" sx={{ color: "#474747" }}>
-                      {data.Summary1[index]} {data.Summary2[index]}
-                    </TableCell>
-                  ) : (
-                    <TableCell align="center" sx={{ color: "#474747" }}>
-                      {item === "CTD" ||
-                      item === "TM-CTD" ||
-                      item === "Seaglider" ||
-                      item === "EM-APEX float" ||
-                      item === "Plankton net" ||
-                      item === "Sediment Trap" ||
-                      item === "Water sampling (bottle)" ||
-                      item === "Big trawling" ||
-                      item === "Trawling" ||
-                      item === "Lander" ||
-                      item === "Multi-core" ||
-                      item === "Box-core" ||
-                      item === "Piston-core" ||
-                      item === "Dredge" ||
-                      item === "Gravity-core" ||
-                      item === "Smith-core" ||
-                      item === "Reflection profiling" ||
-                      item === "LADCP" ||
-                      item === "Towed instrument" ||
-                      item === "Turbulence profiling (VMP250)" ||
-                      item === "Turbulence profiling (VMP500)" ||
-                      item === "UCTD" ||
-                      item === "Sonde" ||
-                      item === "Drifter" ||
-                      item === "Shipek Grab" ||
-                      item === "Bottom trawling" ||
-                      item === "XBT" ||
-                      item === "拋棄式溫深儀(XBT)" ||
-                      item === "自記式紊流量測模組(Microrider)"
-                        ? `${data.Summary1[index]} 站 ${data.Summary2[index]} 次`
-                        : item === "Mooring" && data.Summary2[index] === ""
-                        ? `${data.Summary1[index]} 站`
-                        : item === "Side scan (towed)" &&
-                          data.Summary2[index] === ""
-                        ? `${data.Summary1[index]} 海浬`
-                        : item === "Side scan (towed)" &&
-                          data.Summary2[index] !== ""
-                        ? `${data.Summary1[index]} 站 ${data.Summary2[index]} 次`
-                        : item === "LiDAR"
-                        ? `${data.Summary1[index]} 海浬`
-                        : `${data.Summary1[index]} ${data.Summary2[index]}`}
-                    </TableCell>
-                  )}
-
+                  <TableCell align="center" sx={{ color: "#474747" }}>
+                    {renderSummary(item, index)}
+                  </TableCell>
                   <TableCell align="center" sx={{ color: "#474747" }}>
                     {data.DataOwner[index]}
                   </TableCell>
@@ -112,126 +80,29 @@ export default function AppendTable({ title, data }) {
         </TableContainer>
         <Box sx={{ display: { xs: "block", md: "none" } }}>
           {data.Equipment.map((item, index) => (
-            <List sx={{ width: "100%" }}>
-              <ListItem
-                sx={{
-                  display: "flex",
-                  flexDirection:{xs:'column',sm:'row'},
-                  justifyContent: {xs:'start',sm:'space-between'},
-                  
-                  alignItems: "start",
-                }}
-              >
+            <List sx={{ width: "100%" }} key={item + '-list-' + index}>
+              <ListItem sx={{ display: "flex", flexDirection: { xs: 'column', sm: 'row' }, justifyContent: { xs: 'start', sm: 'space-between' }, alignItems: "start" }}>
                 <div>
-                  <Typography fontWeight={600} gutterBottom>
+                  <Typography sx={{ fontWeight: 500 }} gutterBottom>
                     {item}
                   </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "start",
-                      gap: 1,
-                      mb: 1,
-                    }}
-                  >
-                    <Typography
-                      variant="subtitle2"
-                      sx={{ color: "#474747", fontWeight: 400 }}
-                    >
-                      採集樣品
+                  <Box sx={{ display: "flex", alignItems: "center", justifyContent: "start", gap: 1, mb: 1 }}>
+                    <Typography variant="subtitle2" sx={{ color: "#474747", fontWeight: 400 }}>採集樣品</Typography>
+                    <Typography variant="subtitle2" sx={{ color: "#474747" }}>&bull;</Typography>
+                    <Typography variant="subtitle2" sx={{ color: "#474747", fontWeight: 500 }}>
+                      {renderSummary(item, index)}
                     </Typography>
-                    <Typography variant="subtitle2" sx={{ color: "#474747" }}>
-                      &bull;
-                    </Typography>
-                    {title === "其他作業" ? (
-                      <Typography
-                        variant="subtitle2"
-                        sx={{ color: "#474747", fontWeight: 500 }}
-                      >
-                        {data.Summary1[index]} {data.Summary2[index]}
-                      </Typography>
-                    ) : (
-                      <Typography
-                        variant="subtitle2"
-                        sx={{ color: "#474747", fontWeight: 500 }}
-                      >
-                        {item === "CTD" ||
-                        item === "TM-CTD" ||
-                        item === "Seaglider" ||
-                        item === "EM-APEX float" ||
-                        item === "Plankton net" ||
-                        item === "Sediment Trap" ||
-                        item === "Water sampling (bottle)" ||
-                        item === "Big trawling" ||
-                        item === "Trawling" ||
-                        item === "Lander" ||
-                        item === "Multi-core" ||
-                        item === "Box-core" ||
-                        item === "Piston-core" ||
-                        item === "Dredge" ||
-                        item === "Gravity-core" ||
-                        item === "Smith-core" ||
-                        item === "Reflection profiling" ||
-                        item === "LADCP" ||
-                        item === "Towed instrument" ||
-                        item === "Turbulence profiling (VMP250)" ||
-                        item === "Turbulence profiling (VMP500)" ||
-                        item === "UCTD" ||
-                        item === "Sonde" ||
-                        item === "Drifter" ||
-                        item === "Shipek Grab" ||
-                        item === "Bottom trawling" ||
-                        item === "XBT" ||
-                        item === "拋棄式溫深儀(XBT)" ||
-                        item === "自記式紊流量測模組(Microrider)"
-                          ? `${data.Summary1[index]} 站 ${data.Summary2[index]} 次`
-                          : item === "Mooring" && data.Summary2[index] === ""
-                          ? `${data.Summary1[index]} 站`
-                          : item === "Side scan (towed)" &&
-                            data.Summary2[index] === ""
-                          ? `${data.Summary1[index]} 海浬`
-                          : item === "Side scan (towed)" &&
-                            data.Summary2[index] !== ""
-                          ? `${data.Summary1[index]} 站 ${data.Summary2[index]} 次`
-                          : item === "LiDAR"
-                          ? `${data.Summary1[index]} 海浬`
-                          : `${data.Summary1[index]} ${data.Summary2[index]}`}
-                      </Typography>
-                    )}
                   </Box>
-                 
                 </div>
-                <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "start",
-                      gap: 1,
-                      mb: 1,
-                    }}
-                  >
-                    <Typography
-                      variant="subtitle2"
-                      sx={{ color: "#474747", fontWeight: 400 }}
-                    >
-                      樣品持有人
-                    </Typography>
+                {data.DataOwner[index] && (
+                  <Box sx={{ display: "flex", alignItems: "center", justifyContent: "start", gap: 1, mb: 1 }}>
+                    <Typography variant="subtitle2" sx={{ color: "#474747", fontWeight: 400 }}>樣品持有人</Typography>
                     <Typography variant="subtitle2">&bull;</Typography>
-                    <Chip
-                      icon={<FaceIcon />}
-                      size="small"
-                      sx={{
-                        color: "#474747",
-                        backgroundColor: "rgba(219, 235, 250,0.7)",
-                      }}
-                      label={data.DataOwner[index]}
-                    />
+                    <Chip icon={<FaceIcon />} size="small" label={data.DataOwner[index]} sx={{ color: "#474747", backgroundColor: "rgba(219, 235, 250,0.7)" }} />
                   </Box>
+                )}
               </ListItem>
-              {index < data.Equipment.length - 1 && (
-                <Divider variant="middle" component="li" />
-              )}
+              {index < data.Equipment.length - 1 && <Divider variant="middle" component="li" />}
             </List>
           ))}
         </Box>

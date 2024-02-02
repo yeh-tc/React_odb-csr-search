@@ -14,6 +14,36 @@ import Divider from "@mui/material/Divider";
 import FaceIcon from "@mui/icons-material/Face";
 
 export default function CruiseEquiTable({ data }) {
+  // Helper function to format the collection number with units
+  const formatCollectionNum = (item, index) => {
+    const units = [
+      "都普勒流剖儀ADCP 75-kHz",
+      "單音束測深儀EK-80",
+      "單音束測深儀EA-640",
+      "單音束測深儀EA-640,GPS",
+      "單音束測深儀EK-60,GPS",
+      "單音束測深儀EK-500,GPS",
+      "多音束測深儀EM2040",
+      "多音束測深儀EM304",
+      "多音束測深儀",
+      "船艏氣象儀",
+      "都普勒流剖儀ADCP 150-kHz",
+      "底質剖面儀Edgetech3300",
+      "底質剖面儀Bathy2000",
+      "底質剖面儀",
+      "X波段雷達波浪儀",
+      "多音束測深儀EM712",
+      "都普勒流剖儀ADCP",
+    ].includes(item)
+      ? " 浬"
+      : item === "掃描式聲納" || item === "水下遙控載具(ROV)"
+      ? " 站"
+      : item === "航行紀錄資料"
+      ? " 時"
+      : "";
+    return data.CollectionNum[index] + units;
+  };
+
   return (
     <>
       <Paper sx={{ width: "100%", mb: 2, mt: 5 }} elevation={1}>
@@ -35,7 +65,7 @@ export default function CruiseEquiTable({ data }) {
             <TableBody>
               {data.Item.map((item, index) => (
                 <TableRow
-                  key={item}
+                  key={item + index}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell
@@ -46,39 +76,7 @@ export default function CruiseEquiTable({ data }) {
                     {item}
                   </TableCell>
                   <TableCell align="center" sx={{ color: "#474747" }}>
-                    {item === "都普勒流剖儀ADCP 75-kHz"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "單音束測深儀EK-80"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "單音束測深儀EA-640"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "多音束測深儀EM2040"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "多音束測深儀EM304"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "多音束測深儀"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "船艏氣象儀"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "都普勒流剖儀ADCP 150-kHz"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "底質剖面儀Edgetech3300"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "X波段雷達波浪儀"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "多音束測深儀EM712"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "底質剖面儀Bathy2000"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "單音束測深儀EK-500,GPS"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "都普勒流剖儀ADCP"
-                      ? data.CollectionNum[index] + " 浬"
-                      : item === "掃描式聲納"
-                      ? data.CollectionNum[index] + " 站"
-                      : item === "航行紀錄資料"
-                      ? data.CollectionNum[index] + " 時"
-                      : data.CollectionNum[index]}
+                    {formatCollectionNum(item, index)}
                   </TableCell>
                   <TableCell align="center" sx={{ color: "#474747" }}>
                     {data.CollectionOwner[index]}
@@ -90,17 +88,17 @@ export default function CruiseEquiTable({ data }) {
         </TableContainer>
         <Box sx={{ display: { xs: "block", md: "none" } }}>
           {data.Item.map((item, index) => (
-            <List sx={{ width: "100%" }}>
+            <List sx={{ width: "100%" }} key={item + "-list-" + index}>
               <ListItem
                 sx={{
-                  display: "flex",                  
-                  flexDirection:{xs:'column',sm:'row'},
-                  justifyContent: {xs:'start',sm:'space-between'},
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  justifyContent: { xs: "start", sm: "space-between" },
                   alignItems: "start",
                 }}
               >
                 <div>
-                  <Typography fontWeight={600} gutterBottom>
+                  <Typography sx={{ fontWeight: 500 }} gutterBottom>
                     {item}
                   </Typography>
                   <Box
@@ -125,43 +123,12 @@ export default function CruiseEquiTable({ data }) {
                       variant="subtitle2"
                       sx={{ color: "#474747", fontWeight: 500 }}
                     >
-                      {item === "都普勒流剖儀ADCP 75-kHz"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "單音束測深儀EK-80"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "單音束測深儀EA-640"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "多音束測深儀EM2040"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "多音束測深儀EM304"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "多音束測深儀"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "船艏氣象儀"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "都普勒流剖儀ADCP 150-kHz"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "底質剖面儀Edgetech3300"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "X波段雷達波浪儀"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "多音束測深儀EM712"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "底質剖面儀Bathy2000"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "單音束測深儀EK-500,GPS"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "都普勒流剖儀ADCP"
-                        ? data.CollectionNum[index] + " 浬"
-                        : item === "掃描式聲納"
-                        ? data.CollectionNum[index] + " 站"
-                        : item === "航行紀錄資料"
-                        ? data.CollectionNum[index] + " 時"
-                        : data.CollectionNum[index]}
+                      {formatCollectionNum(item, index)}
                     </Typography>
                   </Box>
                 </div>
-                <Box
+                {data.CollectionOwner[index] && (
+                  <Box
                     sx={{
                       display: "flex",
                       alignItems: "center",
@@ -178,15 +145,16 @@ export default function CruiseEquiTable({ data }) {
                     </Typography>
                     <Typography variant="subtitle2">&bull;</Typography>
                     <Chip
-                      size="small"
                       icon={<FaceIcon />}
+                      size="small"
+                      label={data.CollectionOwner[index]}
                       sx={{
                         color: "#474747",
                         backgroundColor: "rgba(219, 235, 250,0.7)",
                       }}
-                      label={data.CollectionOwner[index]}
                     />
                   </Box>
+                )}
               </ListItem>
               {index < data.Item.length - 1 && (
                 <Divider variant="middle" component="li" />
