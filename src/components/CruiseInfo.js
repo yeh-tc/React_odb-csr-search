@@ -9,17 +9,12 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-
 import AppendTable from "./AppendTable";
-
+import RenderError from "./RenderError";
+import CruiseEquiTable from "./CruiseEquiTable";
 import Avatar from "@mui/material/Avatar";
 import InfoForm from "./InfoForm";
+
 import NTUlogo from "../assets/NTU.gif";
 import SYUlogo from "../assets/SYU.png";
 import NKUSTlogo from "../assets/NKUST.png";
@@ -33,7 +28,7 @@ import NAMRlogo from "../assets/NAMR.svg"
 import DWUlogo from "../assets/DWU.jpg"
 import NTUElogo from "../assets/NTUE.png"
 import cwalogo from "../assets/cwa.svg"
-import RenderError from "./RenderError";
+
 
 
 function formatDateAndTime(isoDateString) {
@@ -335,65 +330,8 @@ export default function CruiseInfo({ shipName, cruiseID }) {
             <Typography variant="h6" sx={{ fontWeight: 500, color: "#2789E3" }}>
               作業項目
             </Typography>
-            {cruiseData[0].CruiseData && (
-              <Paper sx={{ width: "100%", mb: 2,mt:5}} elevation={1}>
-                <Typography
-                  variant="h6"
-                  sx={{ fontWeight: 500, color: "#003566",px:2,py:2 }}
-                >
-                  沿航線資料
-                </Typography>
-                <TableContainer>
-                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell sx={{ width: 250}}>沿航線資料</TableCell>
-                        <TableCell align="center">採集樣品</TableCell>
-                        <TableCell align="center">樣品持有人</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {cruiseData[0].CruiseData.Item.map((item, index) => (
-                        <TableRow
-                          key={item}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell component="th" scope="row" sx={{color: "#474747"}}>
-                            {item}
-                          </TableCell>
-                          <TableCell align="center" sx={{color: "#474747"}}>
-                          {item==='都普勒流剖儀ADCP 75-kHz' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' : 
-                           item==='單音束測深儀EK-80' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='單音束測深儀EA-640' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='多音束測深儀EM2040' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='多音束測深儀EM304' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='多音束測深儀' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='船艏氣象儀' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='都普勒流剖儀ADCP 150-kHz' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='底質剖面儀Edgetech3300' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='X波段雷達波浪儀' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           
-                           item==='多音束測深儀EM712' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='底質剖面儀Bathy2000' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='單音束測深儀EK-500,GPS' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='都普勒流剖儀ADCP' ? cruiseData[0].CruiseData.CollectionNum[index]+' 浬' :
-                           item==='掃描式聲納' ? cruiseData[0].CruiseData.CollectionNum[index]+' 站' :
-                           item==='航行紀錄資料' ? cruiseData[0].CruiseData.CollectionNum[index]+' 時' :
-
-
-                            cruiseData[0].CruiseData.CollectionNum[index]}
-                          </TableCell>
-                          <TableCell align="center" sx={{color: "#474747"}}>
-                            {cruiseData[0].CruiseData.CollectionOwner[index]}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Paper>
+            {cruiseData[0].CruiseData &&(
+              <CruiseEquiTable data={cruiseData[0].CruiseData} />
             )}
             {cruiseData[0].Physical &&(
               <AppendTable title={'物理作業'} data={cruiseData[0].Physical}/>
@@ -414,7 +352,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
               <AppendTable title={'大氣作業'} data={cruiseData[0].Atmospher}/>
             )}
             {cruiseData[0].Other &&(
-              <AppendTable title={'其他作業'} data={cruiseData[0].Other}/>
+              <AppendTable title={'其他作業'} data={cruiseData[0].Other} />
             )}
           </Box>
         </Paper>
