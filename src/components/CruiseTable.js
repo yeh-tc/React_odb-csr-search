@@ -2,7 +2,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import LinearProgress from '@mui/material/LinearProgress';
+
 
 
 const columns = [
@@ -192,14 +192,7 @@ function CustomNoRowsOverlay() {
     </StyledGridOverlay>
   );
 }
-function CustomLoadingOverlay() {
-  return (
-    <StyledGridOverlay>
 
-      <Box sx={{ mt: 1 }}>'Loading'</Box>
-    </StyledGridOverlay>
-  );
-}
 export default function CruiseTable({cruiseData }) {
   
     if (!cruiseData || cruiseData.length === 0) {
@@ -216,8 +209,9 @@ export default function CruiseTable({cruiseData }) {
               rowsPerPageOptions={[5]}
               disableRowSelectionOnClick
               slots={{ noRowsOverlay: CustomNoRowsOverlay,
-                loadingOverlay: CustomLoadingOverlay,}}
+               }}
               sx={{ '--DataGrid-overlayHeight': '400px' }}
+              
             />
           </Box>
         );
@@ -247,7 +241,8 @@ export default function CruiseTable({cruiseData }) {
         rowsPerPageOptions={[5]}
         disableRowSelectionOnClick
         slots={{ noRowsOverlay: CustomNoRowsOverlay,
-          loadingOverlay: CustomLoadingOverlay,}}
+          }}
+
       />
     </Box>
   );
