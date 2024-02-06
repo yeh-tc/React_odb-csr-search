@@ -19,6 +19,7 @@ export default function CruiseEquiTable({ data }) {
     const units = [
       "都普勒流剖儀ADCP 75-kHz",
       "單音束測深儀EK-80",
+      "單音束測深儀EK-80,GPS",
       "單音束測深儀EA-640",
       "單音束測深儀EA-640,GPS",
       "單音束測深儀EK-60,GPS",
@@ -30,13 +31,15 @@ export default function CruiseEquiTable({ data }) {
       "都普勒流剖儀ADCP 150-kHz",
       "底質剖面儀Edgetech3300",
       "底質剖面儀Bathy2000",
+      "底質剖面儀Bathy2010",
       "底質剖面儀",
       "X波段雷達波浪儀",
       "多音束測深儀EM712",
       "都普勒流剖儀ADCP",
     ].includes(item)
       ? " 浬"
-      : item === "掃描式聲納" || item === "水下遙控載具(ROV)"
+      : item === "掃描式聲納" || item === "水下遙控載具(ROV)" || item === "拖曳式水下攝影系統(Tow Cam)" ||
+        item === "深海拖曳式光纖探測系統(FITS)" || item === "深海拖曳式攝影系統(ATIS)" || item === "自主水下載具(AUV)"
       ? " 站"
       : item === "航行紀錄資料"
       ? " 時"
@@ -71,15 +74,31 @@ export default function CruiseEquiTable({ data }) {
                   <TableCell
                     component="th"
                     scope="row"
-                    sx={{ color: "#474747" }}
+                    sx={{ color: "#474747", whiteSpace: "nowrap" }}
+                    
                   >
                     {item}
                   </TableCell>
                   <TableCell align="center" sx={{ color: "#474747" }}>
-                    {formatCollectionNum(item, index)}
+                    {data.CollectionNum[index] &&
+                    formatCollectionNum(item, index)}
                   </TableCell>
-                  <TableCell align="center" sx={{ color: "#474747" }}>
-                    {data.CollectionOwner[index]}
+                  <TableCell align="center" sx={{ width:300, color: "#474747" }}>
+                  {data.CollectionOwner[index] !== "" &&
+                    <Box sx={{display:'flex',flexWrap:'wrap',gap:1, justifyContent:'center'}}>
+                     {data.CollectionOwner[index].split("、").map((owner, ownerIndex)=>(
+                     <Chip
+                      key={owner + '-' + ownerIndex}
+                      icon={<FaceIcon />}
+                      size="small"
+                      label={owner}
+                      sx={{
+                        color: "#474747",
+                        backgroundColor: "rgba(219, 235, 250,0.7)",
+                      }}
+                      />))
+                    }
+                    </Box>}
                   </TableCell>
                 </TableRow>
               ))}
@@ -121,7 +140,7 @@ export default function CruiseEquiTable({ data }) {
                     </Typography>
                     <Typography
                       variant="subtitle2"
-                      sx={{ color: "#474747", fontWeight: 500 }}
+                      sx={{ color: "#474747", fontWeight: 500}}
                     >
                       {formatCollectionNum(item, index)}
                     </Typography>
@@ -139,20 +158,24 @@ export default function CruiseEquiTable({ data }) {
                   >
                     <Typography
                       variant="subtitle2"
-                      sx={{ color: "#474747", fontWeight: 400 }}
+                      sx={{ color: "#474747", fontWeight: 400, whiteSpace: "nowrap" }}
                     >
                       樣品持有人
                     </Typography>
                     <Typography variant="subtitle2">&bull;</Typography>
+                    <Box sx={{ display:'flex', flexDirection:{xs: 'row', sm: 'column'}, flexWrap: 'wrap', gap: 1 }}>
+                    {data.CollectionOwner[index].split("、").map((owner, ownerIndex)=>(
                     <Chip
+                      key={owner + '-' + ownerIndex}
                       icon={<FaceIcon />}
                       size="small"
-                      label={data.CollectionOwner[index]}
+                      label={owner}
                       sx={{
                         color: "#474747",
                         backgroundColor: "rgba(219, 235, 250,0.7)",
                       }}
-                    />
+                    />))}
+                    </Box>
                   </Box>
                 )}
               </ListItem>

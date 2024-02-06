@@ -30,6 +30,8 @@ import DWUlogo from "../assets/DWU.jpg"
 import NTUElogo from "../assets/NTUE.png"
 import cwalogo from "../assets/cwa.svg"
 import MElogo from "../assets/ME.png"
+import dhlogo from "../assets/NDHU.png"
+import nmnslogo from "../assets/NMNS.png"
 
 
 
@@ -266,12 +268,27 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                           src={
                             department === "台大" ||
                             department === "臺大" ||
+                            department === "臺灣大學" ||
                             department === "台灣大學" ||
-                            department === "國立臺灣大學"
+                            department === "國立臺灣大學" ||
+                            department === "台大海研所" ||
+                            department === "台大海洋所" ||
+                            department === "台灣大學海洋所" ||
+                            department === "台大地質所"
                               ? NTUlogo
                               : department === "中山" ||
                                 department === "中山大學" ||
-                                department === "國立中山大學"
+                                department === "國立中山大學" ||
+                                department === "中山大學海生所" ||
+                                department === "中山大學海科院" ||
+                                department === "中山大學海科院海研三號" ||
+                                department === "中山大學海資系" ||
+                                department === "中山海資" ||
+                                department === "中山大學海地化所" ||
+                                department === "中山海地化" ||
+                                department === "中山大學海下所" ||
+                                department === "中山大學海科院海地化所" ||
+                                department === "中山大學海工系"
                               ? SYUlogo
                               : department === "高科大"
                               ? NKUSTlogo
@@ -282,14 +299,17 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                               ? marinelogo
                               : department === "海大" ||
                                 department === "海洋大學" ||
-                                department === "國立臺灣海洋大學"
+                                department === "國立臺灣海洋大學" ||
+                                department === "海洋大學漁業科學所" ||
+                                department === "海洋大學應用地球物理所"
                               ? NTOUlogo
                               : department === "中研院" ||
                                 department === "中央研究院"
                               ? Sinicalogo
                               : department === "成大" ||
                                 department === "成功大學" ||
-                                department === "國立成功大學"
+                                department === "國立成功大學" ||
+                                department === "成功大學水工所"
                               ? NCKUlogo
                               : department === "師大" ||
                                 department === "國立師範大學" ||
@@ -309,6 +329,11 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                               : department === "環保署" ||
                                 department === "環境部"
                               ? MElogo
+                              : department === "東華大學" ||
+                                department === "東華"
+                              ? dhlogo
+                              : department === "科博館"
+                              ? nmnslogo
                               : undefined
                           }
                         >{department ? department.charAt(0) : "?"}</Avatar>

@@ -13,15 +13,16 @@ import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import FaceIcon from "@mui/icons-material/Face";
 
+
 export default function AppendTable({ title, data }) {
-  // Function to handle conditional logic
   const renderSummary = (item, index) => {
     if (title === "其他作業") {
       return `${data.Summary1[index]} ${data.Summary2[index]}`;
     } else if (data.Summary2[index] === "站") {
       return `${data.Summary1[index]} ${data.Summary2[index]}`;
-    } else {
-      // List of equipment needing special handling
+    } else if (data.Summary1[index] === undefined) {
+      return ``;
+    }else {
       const specialEquipment = [
         "CTD", "TM-CTD", "Seaglider", "EM-APEX float", "Plankton net",
         "Sediment Trap", "Water sampling (bottle)", "Big trawling", "Trawling",
@@ -51,9 +52,10 @@ export default function AppendTable({ title, data }) {
       <Paper sx={{ width: "100%", mb: 2, mt: 5 }} elevation={1}>
         <Typography variant="h6" sx={{ fontWeight: 500, color: "#003566", px: 2, py: 2 }}>
           {title}
+          
         </Typography>
         <TableContainer sx={{ display: { xs: "none", md: "block" } }}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table  sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell sx={{ width: 200 }}>作業項目</TableCell>
@@ -64,14 +66,29 @@ export default function AppendTable({ title, data }) {
             <TableBody>
               {data.Equipment.map((item, index) => (
                 <TableRow key={item + index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                  <TableCell component="th" scope="row" sx={{ color: "#474747" }}>
+                  <TableCell component="th" scope="row" sx={{ color: "#474747", whiteSpace: "nowrap" }}>
                     {item}
                   </TableCell>
                   <TableCell align="center" sx={{ color: "#474747" }}>
                     {renderSummary(item, index)}
                   </TableCell>
-                  <TableCell align="center" sx={{ color: "#474747" }}>
-                    {data.DataOwner[index]}
+                  <TableCell align="center" sx={{ width:300,color: "#474747" }}>
+                    
+                    {data.DataOwner[index] !== "" &&
+                    <Box sx={{display:'flex',flexWrap:'wrap',gap:1, justifyContent:'center'}}>
+                     {data.DataOwner[index].split("、").map((owner, ownerIndex)=>(
+                     <Chip
+                      key={owner + '-' + ownerIndex}
+                      icon={<FaceIcon />}
+                      size="small"
+                      label={owner}
+                      sx={{
+                        color: "#474747",
+                        backgroundColor: "rgba(219, 235, 250,0.7)",
+                      }}
+                      />))
+                    }
+                    </Box>}
                   </TableCell>
                 </TableRow>
               ))}
@@ -95,10 +112,14 @@ export default function AppendTable({ title, data }) {
                   </Box>
                 </div>
                 {data.DataOwner[index] && (
-                  <Box sx={{ display: "flex", alignItems: "center", justifyContent: "start", gap: 1, mb: 1 }}>
-                    <Typography variant="subtitle2" sx={{ color: "#474747", fontWeight: 400 }}>樣品持有人</Typography>
+                  <Box sx={{ display: "flex", alignItems: {xs:'start',sm:"center"}, justifyContent: "start", gap: 1, mb: 1 }}>
+                    <Typography variant="subtitle2" sx={{ color: "#474747", fontWeight: 400, whiteSpace: "nowrap" }}>樣品持有人</Typography>
                     <Typography variant="subtitle2">&bull;</Typography>
-                    <Chip icon={<FaceIcon />} size="small" label={data.DataOwner[index]} sx={{ color: "#474747", backgroundColor: "rgba(219, 235, 250,0.7)" }} />
+                    <Box sx={{ display:'flex', flexDirection:{xs: 'row', sm: 'column'}, flexWrap: 'wrap', gap: 1 }}>
+                    {data.DataOwner[index].split("、").map((owner, ownerIndex)=>(
+                    <Chip key={owner + '-' + ownerIndex} icon={<FaceIcon />} size="small" label={owner} sx={{ color: "#474747", backgroundColor: "rgba(219, 235, 250,0.7)" }} />))}
+                    
+                    </Box>
                   </Box>
                 )}
               </ListItem>
