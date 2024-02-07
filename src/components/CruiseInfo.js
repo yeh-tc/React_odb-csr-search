@@ -91,7 +91,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
 
   // Render the actual content if data is available...
 
- 
+
   return (
     <Box>
       <Typography variant="h5" sx={{ fontWeight: 500, color: "##71A1C" }}>
@@ -258,6 +258,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
             <List>
               {cruiseData[0].Participants.Department.map(
                 (department, index) => (
+                  department !== "" && (
                   <React.Fragment key={index}>
                     <ListItem
                       sx={{ display: "flex", gap: 2, alignItems: "center" }}
@@ -352,11 +353,12 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                         }
                       />
                     </ListItem>
-                    {index <
+                    {cruiseData[0].Participants.Department[index+1] !== "" &&
+                    index <
                       cruiseData[0].Participants.Department.length - 1 && (
                       <Divider variant="middle" component="li" />
                     )}
-                  </React.Fragment>
+                  </React.Fragment>)
                 )
               )}
             </List>

@@ -16,7 +16,11 @@ import FaceIcon from "@mui/icons-material/Face";
 
 export default function AppendTable({ title, data }) {
   const renderSummary = (item, index) => {
-    if (title === "其他作業") {
+    const isNumericSummary2 = !isNaN(+data.Summary2[index]);
+    if (isNumericSummary2){
+      return `${data.Summary1[index]} 站 ${data.Summary2[index]} 次`;
+    }
+    else if (title === "其他作業") {
       return `${data.Summary1[index]} ${data.Summary2[index]}`;
     } else if (data.Summary2[index] === "站") {
       return `${data.Summary1[index]} ${data.Summary2[index]}`;
@@ -32,8 +36,8 @@ export default function AppendTable({ title, data }) {
         "UCTD", "Sonde", "Drifter", "Shipek Grab", "Bottom trawling", "XBT",
         "拋棄式溫深儀(XBT)", "自記式紊流量測模組(Microrider)"
       ];
-
-      if (specialEquipment.includes(item)) {
+      
+      if (specialEquipment.includes(item) ) {
         return `${data.Summary1[index]} 站 ${data.Summary2[index]} 次`;
       } else if (item === "Mooring" && data.Summary2[index] === "") {
         return `${data.Summary1[index]} 站`;
