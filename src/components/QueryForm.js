@@ -342,7 +342,6 @@ export default function QueryForm() {
       </Box>
     </React.Fragment>
   );
-
   return (
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -465,15 +464,13 @@ export default function QueryForm() {
           {renderFilters()}
         </Box>
 
-        {isLoading ? (
-          <LinearProgress />
-        ) : (
-          isError && (
+   
+          {isError && (
             <Alert severity="error">資料庫連線異常，請您稍後再試，謝謝。</Alert>
           )
-        )}
+        }
 
-        <CruiseTable cruiseData={cruiseData || []} />
+        <CruiseTable cruiseData={cruiseData || []} isLoading={isLoading}/>
       </Box>
     </>
   );

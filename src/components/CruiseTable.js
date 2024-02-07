@@ -3,8 +3,6 @@ import Box from "@mui/material/Box";
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 
-
-
 const columns = [
   {
     field: "CruiseID",
@@ -193,8 +191,7 @@ function CustomNoRowsOverlay() {
   );
 }
 
-export default function CruiseTable({cruiseData }) {
-  
+export default function CruiseTable({cruiseData, isLoading }) {
     if (!cruiseData || cruiseData.length === 0) {
         return (
           <Box sx={{'& .super-app-theme--header': {
@@ -211,7 +208,7 @@ export default function CruiseTable({cruiseData }) {
               slots={{ noRowsOverlay: CustomNoRowsOverlay,
                }}
               sx={{ '--DataGrid-overlayHeight': '400px' }}
-              
+              loading={isLoading}
             />
           </Box>
         );
@@ -242,7 +239,6 @@ export default function CruiseTable({cruiseData }) {
         disableRowSelectionOnClick
         slots={{ noRowsOverlay: CustomNoRowsOverlay,
           }}
-
       />
     </Box>
   );
