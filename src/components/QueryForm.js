@@ -14,8 +14,6 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import OutlinedInput from "@mui/material/OutlinedInput";
 
-import LinearProgress from "@mui/material/LinearProgress";
-
 import TuneIcon from "@mui/icons-material/Tune";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 

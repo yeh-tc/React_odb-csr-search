@@ -15,7 +15,6 @@ import CruiseEquiTable from "./CruiseEquiTable";
 import Avatar from "@mui/material/Avatar";
 import InfoForm from "./InfoForm";
 
-
 import NTUlogo from "../assets/NTU.gif";
 import SYUlogo from "../assets/SYU.png";
 import NKUSTlogo from "../assets/NKUST.png";
@@ -25,15 +24,13 @@ import NTOUlogo from "../assets/ntoulogo.gif";
 import Sinicalogo from "../assets/sinica.png";
 import NCKUlogo from "../assets/ncku.png";
 import NTNUlogo from "../assets/NTNU.png";
-import NAMRlogo from "../assets/NAMR.svg"
-import DWUlogo from "../assets/DWU.jpg"
-import NTUElogo from "../assets/NTUE.png"
-import cwalogo from "../assets/cwa.svg"
-import MElogo from "../assets/ME.png"
-import dhlogo from "../assets/NDHU.png"
-import nmnslogo from "../assets/NMNS.png"
-
-
+import NAMRlogo from "../assets/NAMR.svg";
+import DWUlogo from "../assets/DWU.jpg";
+import NTUElogo from "../assets/NTUE.png";
+import cwalogo from "../assets/cwa.svg";
+import MElogo from "../assets/ME.png";
+import dhlogo from "../assets/NDHU.png";
+import nmnslogo from "../assets/NMNS.png";
 
 function formatDateAndTime(isoDateString) {
   if (!isoDateString) return "";
@@ -67,30 +64,36 @@ export default function CruiseInfo({ shipName, cruiseID }) {
     isLoading,
     isError,
   } = useCruiseInfo(shipName, cruiseID);
-  
+
   if (isLoading) {
     return (
       <Box>
-        <Typography variant="h5" sx={{ fontWeight: 500, color: "#474747", mb: 2 }}>
+        <Typography
+          variant="h5"
+          sx={{ fontWeight: 500, color: "#474747", mb: 2 }}
+        >
           Loading...
         </Typography>
-        <RenderError progess/>
-    </Box>);
+        <RenderError progess />
+      </Box>
+    );
   }
 
   if (isError || cruiseData.length === 0) {
     return (
       <Box>
-        <Typography variant="h5" sx={{ fontWeight: 500, color: "#474747", mb: 2 }}>
+        <Typography
+          variant="h5"
+          sx={{ fontWeight: 500, color: "#474747", mb: 2 }}
+        >
           探測報告不存在於資料庫 (｡ŏ_ŏ)
         </Typography>
-        <RenderError/>
+        <RenderError />
       </Box>
     );
   }
 
   // Render the actual content if data is available...
-
 
   return (
     <Box>
@@ -149,13 +152,12 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                 text={"領隊教授"}
                 info={cruiseData[0].CruiseBasicData.LeaderName}
               />
-              
             </Box>
             <InfoForm
-                text={"探測海域"}
-                info={cruiseData[0].CruiseBasicData.ExploreOcean}
-                sx={{ flexBasis: { sm: "100%", md: 0, lg: 0 } }}
-              />
+              text={"探測海域"}
+              info={cruiseData[0].CruiseBasicData.ExploreOcean}
+              sx={{ flexBasis: { sm: "100%", md: 0, lg: 0 } }}
+            />
             <Box
               sx={{
                 display: "flex",
@@ -231,15 +233,15 @@ export default function CruiseInfo({ shipName, cruiseID }) {
               />
             </Box>
 
-              <InfoForm
-                text={"計畫名稱"}
-                info={cruiseData[0].CruiseBasicData.PlanName}
-              />
-              <InfoForm
-                text={"探測人員"}
-                info={cruiseData[0].CruiseBasicData.Technician}
-              />
-            
+            <InfoForm
+              text={"計畫名稱"}
+              info={cruiseData[0].CruiseBasicData.PlanName}
+            />
+            <InfoForm
+              text={"探測人員"}
+              info={cruiseData[0].CruiseBasicData.Technician}
+            />
+
             <InfoForm
               text={"備註 (作業狀況說明及建議事項)"}
               info={cruiseData[0].CruiseBasicData.Remark}
@@ -252,148 +254,165 @@ export default function CruiseInfo({ shipName, cruiseID }) {
               參與人員
             </Typography>
           </Box>
-          {cruiseData[0].Participants.Department.some(dept => dept.trim() !== '')  &&(
-          <Box>
-            
-            <List>
-              {cruiseData[0].Participants.Department.map(
-                (department, index) => (
-                  department !== "" && (
-                  <React.Fragment key={index}>
-                    <ListItem
-                      sx={{ display: "flex", gap: 2, alignItems: "center" }}
-                    >
-                      <ListItemAvatar>
-                        <Avatar
-                          alt={department}
-                          src={
-                            department === "台大" ||
-                            department === "臺大" ||
-                            department === "臺灣大學" ||
-                            department === "台灣大學" ||
-                            department === "國立臺灣大學" ||
-                            department === "台大海研所" ||
-                            department === "台大海洋所" ||
-                            department === "台灣大學海洋所" ||
-                            department === "台大地質所"
-                              ? NTUlogo
-                              : department === "中山" ||
-                                department === "中山大學" ||
-                                department === "國立中山大學" ||
-                                department === "中山大學海生所" ||
-                                department === "中山大學海科院" ||
-                                department === "中山大學海科院海研三號" ||
-                                department === "中山大學海資系" ||
-                                department === "中山海資" ||
-                                department === "中山大學海地化所" ||
-                                department === "中山海地化" ||
-                                department === "中山大學海下所" ||
-                                department === "中山大學海科院海地化所" ||
-                                department === "中山大學海工系"
-                              ? SYUlogo
-                              : department === "高科大"
-                              ? NKUSTlogo
-                              : department === "高師大"
-                              ? NKNUlogo
-                              : department === "海軍官校" ||
-                                department === "海軍軍官學校"
-                              ? marinelogo
-                              : department === "海大" ||
-                                department === "海洋大學" ||
-                                department === "國立臺灣海洋大學" ||
-                                department === "海洋大學漁業科學所" ||
-                                department === "海洋大學應用地球物理所"
-                              ? NTOUlogo
-                              : department === "中研院" ||
-                                department === "中央研究院"
-                              ? Sinicalogo
-                              : department === "成大" ||
-                                department === "成功大學" ||
-                                department === "國立成功大學" ||
-                                department === "成功大學水工所"
-                              ? NCKUlogo
-                              : department === "師大" ||
-                                department === "國立師範大學" ||
-                                department === "師範大學" ||
-                                department === "台師大"
-                              ? NTNUlogo
-                              : department === "國海院" ||
-                                department === "國家海洋研究院"
-                              ? NAMRlogo
-                              : department === "東吳大學"||
-                                department === "東吳"
-                              ? DWUlogo
-                              : department === "北教大"
-                              ? NTUElogo
-                              : department === "中央氣象局"
-                              ? cwalogo
-                              : department === "環保署" ||
-                                department === "環境部"
-                              ? MElogo
-                              : department === "東華大學" ||
-                                department === "東華"
-                              ? dhlogo
-                              : department === "科博館"
-                              ? nmnslogo
-                              : undefined
-                          }
-                        >{department ? department.charAt(0) : "?"}</Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={department}
-                        secondary={
-                          <Typography
-                            sx={{ display: "inline", color: "#474747" }}
-                            component="span"
-                            variant="body2"
-                            color="text.primary"
+          {cruiseData[0].Participants.Department.some(
+            (dept) => dept.trim() !== ""
+          ) && (
+            <Box>
+              <List>
+                {cruiseData[0].Participants.Department.map(
+                  (department, index) => {
+                    const name = cruiseData[0].Participants.Name[index];
+                    // Render only if department or name is not an empty string, and ensure not to render when both are empty
+                    if (
+                      (department !== "" || name !== "") &&
+                      !(department === "" && name === "")
+                    ) {
+                      return (
+                        <React.Fragment key={index}>
+                          <ListItem
+                            sx={{
+                              display: "flex",
+                              gap: 2,
+                              alignItems: "center",
+                            }}
                           >
-                            {cruiseData[0].Participants.Name[index]}
-                          </Typography>
-                        }
-                      />
-                    </ListItem>
-                    {cruiseData[0].Participants.Department[index+1] !== "" &&
-                    index <
-                      cruiseData[0].Participants.Department.length - 1 && (
-                      <Divider variant="middle" component="li" />
-                    )}
-                  </React.Fragment>)
-                )
-              )}
-            </List>
-          
-          </Box>)
-        }
+                            <ListItemAvatar>
+                              <Avatar
+                                alt={department || "Unknown"}
+                                src={
+                                  department === "台大" ||
+                                  department === "臺大" ||
+                                  department === "臺灣大學" ||
+                                  department === "台灣大學" ||
+                                  department === "國立臺灣大學" ||
+                                  department === "台大海研所" ||
+                                  department === "台大海洋所" ||
+                                  department === "台灣大學海洋所" ||
+                                  department === "台大地質所"
+                                    ? NTUlogo
+                                    : department === "中山" ||
+                                      department === "中山大學" ||
+                                      department === "國立中山大學" ||
+                                      department === "中山大學海生所" ||
+                                      department === "中山大學海科院" ||
+                                      department === "中山大學海科院海研三號" ||
+                                      department === "中山大學海資系" ||
+                                      department === "中山海資" ||
+                                      department === "中山大學海地化所" ||
+                                      department === "中山海地化" ||
+                                      department === "中山大學海下所" ||
+                                      department === "中山大學海科院海地化所" ||
+                                      department === "中山大學海工系"
+                                    ? SYUlogo
+                                    : department === "高科大"
+                                    ? NKUSTlogo
+                                    : department === "高師大"
+                                    ? NKNUlogo
+                                    : department === "海軍官校" ||
+                                      department === "海軍軍官學校"
+                                    ? marinelogo
+                                    : department === "海大" ||
+                                      department === "海洋大學" ||
+                                      department === "國立臺灣海洋大學" ||
+                                      department === "海洋大學漁業科學所" ||
+                                      department === "海洋大學應用地球物理所"
+                                    ? NTOUlogo
+                                    : department === "中研院" ||
+                                      department === "中央研究院"
+                                    ? Sinicalogo
+                                    : department === "成大" ||
+                                      department === "成功大學" ||
+                                      department === "國立成功大學" ||
+                                      department === "成功大學水工所"
+                                    ? NCKUlogo
+                                    : department === "師大" ||
+                                      department === "國立師範大學" ||
+                                      department === "師範大學" ||
+                                      department === "台師大"
+                                    ? NTNUlogo
+                                    : department === "國海院" ||
+                                      department === "國家海洋研究院"
+                                    ? NAMRlogo
+                                    : department === "東吳大學" ||
+                                      department === "東吳"
+                                    ? DWUlogo
+                                    : department === "北教大"
+                                    ? NTUElogo
+                                    : department === "中央氣象局"
+                                    ? cwalogo
+                                    : department === "環保署" ||
+                                      department === "環境部"
+                                    ? MElogo
+                                    : department === "東華大學" ||
+                                      department === "東華"
+                                    ? dhlogo
+                                    : department === "科博館"
+                                    ? nmnslogo
+                                    : undefined
+                                }
+                              >
+                                {department ? department.charAt(0) : "?"}
+                              </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                              primary={department || ""}
+                              secondary={
+                                <Typography
+                                  sx={{ display: "inline", color: "#474747" }}
+                                  component="span"
+                                  variant="body2"
+                                  color="text.primary"
+                                >
+                                  {name}
+                                </Typography>
+                              }
+                            />
+                          </ListItem>
+                          {index <
+                            cruiseData[0].Participants.Department.length -
+                              1 && <Divider variant="middle" component="li" />}
+                        </React.Fragment>
+                      );
+                    } else {
+                      return null;
+                    }
+                  }
+                )}
+              </List>
+            </Box>
+          )}
         </Paper>
         <Paper variant="outlined" sx={{ backgroundColor: "#F8FaFC" }}>
           <Box sx={{ mb: 1, px: 2, py: 2 }}>
             <Typography variant="h6" sx={{ fontWeight: 500, color: "#2789E3" }}>
               作業項目
             </Typography>
-            {cruiseData[0].CruiseData &&(
+            {cruiseData[0].CruiseData && (
               <CruiseEquiTable data={cruiseData[0].CruiseData} />
             )}
-            {cruiseData[0].Physical &&(
-              <AppendTable title={'物理作業'} data={cruiseData[0].Physical}/>
+            {cruiseData[0].Physical && (
+              <AppendTable title={"物理作業"} data={cruiseData[0].Physical} />
             )}
-            {cruiseData[0].Biogeochemical &&(
-              <AppendTable title={'生地化作業'} data={cruiseData[0].Biogeochemical}/>
+            {cruiseData[0].Biogeochemical && (
+              <AppendTable
+                title={"生地化作業"}
+                data={cruiseData[0].Biogeochemical}
+              />
             )}
-            {cruiseData[0].Biology &&(
-              <AppendTable title={'生物作業'} data={cruiseData[0].Biology}/>
+            {cruiseData[0].Biology && (
+              <AppendTable title={"生物作業"} data={cruiseData[0].Biology} />
             )}
-            {cruiseData[0].Geology &&(
-              <AppendTable title={'地質作業'} data={cruiseData[0].Geology}/>
+            {cruiseData[0].Geology && (
+              <AppendTable title={"地質作業"} data={cruiseData[0].Geology} />
             )}
-            {cruiseData[0].Geophysics &&(
-              <AppendTable title={'地物作業'} data={cruiseData[0].Geophysics}/>
+            {cruiseData[0].Geophysics && (
+              <AppendTable title={"地物作業"} data={cruiseData[0].Geophysics} />
             )}
-            {cruiseData[0].Atmospher &&(
-              <AppendTable title={'大氣作業'} data={cruiseData[0].Atmospher}/>
+            {cruiseData[0].Atmospher && (
+              <AppendTable title={"大氣作業"} data={cruiseData[0].Atmospher} />
             )}
-            {cruiseData[0].Other &&(
-              <AppendTable title={'其他作業'} data={cruiseData[0].Other} />
+            {cruiseData[0].Other && (
+              <AppendTable title={"其他作業"} data={cruiseData[0].Other} />
             )}
           </Box>
         </Paper>

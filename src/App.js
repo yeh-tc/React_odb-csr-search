@@ -1,5 +1,5 @@
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
-import { createBrowserRouter, RouterProvider, Route, Navigate } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Home from './pages/Home';
