@@ -16,9 +16,22 @@ import FaceIcon from "@mui/icons-material/Face";
 
 export default function AppendTable({ title, data }) {
   const renderSummary = (item, index) => {
-    const isNumericSummary2 = !isNaN(+data.Summary2[index]);
-    if (isNumericSummary2){
+    const isNumericSummary2 = !isNaN(+data.Summary2[index])&& data.Summary2[index].trim().length > 0;
+    const isNumericSummary1 = !isNaN(+data.Summary1[index])&& data.Summary1[index].trim().length > 0;
+    if (isNumericSummary1 && isNumericSummary2){
       return `${data.Summary1[index]} 站 ${data.Summary2[index]} 次`;
+    }
+    else if(!isNumericSummary1 && isNumericSummary2){
+      return `${data.Summary2[index]} 次`;
+    }
+    else if(isNumericSummary1 && !isNumericSummary2 && data.Summary2[index]==='浬'){
+      return `${data.Summary1[index]} 浬`;
+    }
+    else if(isNumericSummary1 && !isNumericSummary2 && data.Summary2[index]==='站'){
+      return `${data.Summary1[index]} 站`;
+    }
+    else if(isNumericSummary1 && data.Summary2[index]===""){
+      return `${data.Summary1[index]} 站`;
     }
     else if (title === "其他作業") {
       return `${data.Summary1[index]} ${data.Summary2[index]}`;
@@ -50,7 +63,7 @@ export default function AppendTable({ title, data }) {
       }
     }
   };
-
+ 
   return (
     <>
       <Paper sx={{ width: "100%", mb: 2, mt: 5 }} elevation={1}>
@@ -70,7 +83,7 @@ export default function AppendTable({ title, data }) {
             <TableBody>
               {data.Equipment.map((item, index) => (
                 <TableRow key={item + index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                  <TableCell component="th" scope="row" sx={{ color: "#474747", whiteSpace: "nowrap" }}>
+                  <TableCell component="th" scope="row" sx={{ color: "#474747", whiteSpace: "wrap" }}>
                     {item}
                   </TableCell>
                   <TableCell align="center" sx={{ color: "#474747" }}>

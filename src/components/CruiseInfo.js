@@ -31,6 +31,7 @@ import cwalogo from "../assets/cwa.svg";
 import MElogo from "../assets/ME.png";
 import dhlogo from "../assets/NDHU.png";
 import nmnslogo from "../assets/NMNS.png";
+import NCHUlogo from "../assets/NCHU.png"
 
 function formatDateAndTime(isoDateString) {
   if (!isoDateString) return "";
@@ -49,7 +50,7 @@ function formatDateAndTime(isoDateString) {
 const useCruiseInfo = (shipName, cruiseID) => {
   return useQuery(["cruiseInfo", shipName, cruiseID], async () => {
     const response = await fetch(
-      `https://api.odb.ntu.edu.tw/cruise/csrqry/${shipName}/${cruiseID}`
+      `/cruise/csrqry/${shipName}/${cruiseID}`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -79,7 +80,20 @@ export default function CruiseInfo({ shipName, cruiseID }) {
     );
   }
 
-  if (isError || cruiseData.length === 0) {
+  if (isError) {
+    return (
+      <Box>
+        <Typography
+          variant="h5"
+          sx={{ fontWeight: 500, color: "#474747", mb: 2 }}
+        >
+          資料庫連線異常，請您稍後再試，謝謝 (｡ŏ_ŏ)
+        </Typography>
+        <RenderError />
+      </Box>
+    );
+  }
+  if (cruiseData.length === 0) {
     return (
       <Box>
         <Typography
@@ -254,9 +268,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
               參與人員
             </Typography>
           </Box>
-          {cruiseData[0].Participants.Department.some(
-            (dept) => dept.trim() !== ""
-          ) && (
+          
             <Box>
               <List>
                 {cruiseData[0].Participants.Department.map(
@@ -285,6 +297,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                                   department === "臺灣大學" ||
                                   department === "台灣大學" ||
                                   department === "國立臺灣大學" ||
+                                  department === "國立台灣大學" ||
                                   department === "台大海研所" ||
                                   department === "台大海洋所" ||
                                   department === "台灣大學海洋所" ||
@@ -298,21 +311,26 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                                       department === "中山大學海科院海研三號" ||
                                       department === "中山大學海資系" ||
                                       department === "中山海資" ||
+                                      department === "中山海科系" ||
                                       department === "中山大學海地化所" ||
                                       department === "中山海地化" ||
                                       department === "中山大學海下所" ||
                                       department === "中山大學海科院海地化所" ||
                                       department === "中山大學海工系"
                                     ? SYUlogo
-                                    : department === "高科大"
+                                    : department === "高科大" ||
+                                      department === "國立高雄科技大學"
                                     ? NKUSTlogo
                                     : department === "高師大"
                                     ? NKNUlogo
                                     : department === "海軍官校" ||
+                                      department === "海軍官校應用科學系" ||
                                       department === "海軍軍官學校"
                                     ? marinelogo
                                     : department === "海大" ||
                                       department === "海洋大學" ||
+                                      department === "國立海洋大學" ||
+                                      department === "臺灣海洋大學" ||
                                       department === "國立臺灣海洋大學" ||
                                       department === "海洋大學漁業科學所" ||
                                       department === "海洋大學應用地球物理所"
@@ -338,20 +356,24 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                                     ? DWUlogo
                                     : department === "北教大"
                                     ? NTUElogo
-                                    : department === "中央氣象局"
+                                    : department === "中央氣象局" ||
+                                      department === "氣象局"
                                     ? cwalogo
                                     : department === "環保署" ||
                                       department === "環境部"
                                     ? MElogo
                                     : department === "東華大學" ||
+                                      department === "國立東華大學海洋生物研究" ||
                                       department === "東華"
                                     ? dhlogo
                                     : department === "科博館"
                                     ? nmnslogo
+                                    : department === "中興大學"
+                                    ? NCHUlogo
                                     : undefined
                                 }
                               >
-                                {department ? department.charAt(0) : "?"}
+                                {department ? department.charAt(0) : undefined}
                               </Avatar>
                             </ListItemAvatar>
                             <ListItemText
@@ -380,7 +402,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                 )}
               </List>
             </Box>
-          )}
+
         </Paper>
         <Paper variant="outlined" sx={{ backgroundColor: "#F8FaFC" }}>
           <Box sx={{ mb: 1, px: 2, py: 2 }}>

@@ -9,9 +9,9 @@ const columns = [
     headerName: "航次代號",
     width: 120,
     type:'string',
-    sortable: false,
+    sortable: true,
     editable: false,
-    filterable: false,
+    filterable: true,
     headerClassName: 'super-app-theme--header',
     renderCell: (params) => {
         return (

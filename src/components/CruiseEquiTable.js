@@ -36,10 +36,11 @@ export default function CruiseEquiTable({ data }) {
       "X波段雷達波浪儀",
       "多音束測深儀EM712",
       "都普勒流剖儀ADCP",
+      "拖曳水下聲納載台"
     ].includes(item)
       ? " 浬"
       : item === "掃描式聲納" || item === "水下遙控載具(ROV)" || item === "拖曳式水下攝影系統(Tow Cam)" ||
-        item === "深海拖曳式光纖探測系統(FITS)" || item === "深海拖曳式攝影系統(ATIS)" || item === "自主水下載具(AUV)"
+        item === "深海拖曳式光纖探測系統(FITS)" || item === "深海拖曳式攝影系統(ATIS)" || item === "自主水下載具(AUV)" || item === "超短基線(USBL)" || item === "漂浮式載台"
       ? " 站"
       : item === "航行紀錄資料"
       ? " 時"
@@ -74,7 +75,7 @@ export default function CruiseEquiTable({ data }) {
                   <TableCell
                     component="th"
                     scope="row"
-                    sx={{ color: "#474747", whiteSpace: "nowrap" }}
+                    sx={{ color: "#474747", whiteSpace: "wrap" }}
                     
                   >
                     {item}

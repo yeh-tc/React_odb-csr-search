@@ -82,6 +82,7 @@ function formatDate(date) {
   const year = d.getFullYear();
   return `${year}-${month}-${day}`;
 }
+//const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
 //react-query
 function useCruiseData(ship, cruiseid, leader, date1, date2, canFetch) {
   return useQuery(
@@ -91,7 +92,7 @@ function useCruiseData(ship, cruiseid, leader, date1, date2, canFetch) {
         return { data: [], canFetch: false };
       }
       const response = await fetch(
-        `https://api.odb.ntu.edu.tw/cruise/csrqry?ship=${ship}&crid=${cruiseid}&leader=${leader}&start=${date1}&end=${date2}&append=`
+        `/cruise/csrqry?ship=${ship}&crid=${cruiseid}&leader=${leader}&start=${date1}&end=${date2}&append=`
       );
       
       if (!response.ok) {
@@ -145,7 +146,7 @@ export default function QueryForm() {
   }, [error1, error2]);
 
   useEffect(() => {
-    const url = `https://api.odb.ntu.edu.tw/cruise/csrqry?ship=${ship.join(',')}&crid=${cruiseid}&leader=${leader}&start=${date1}&end=${date2}&append=&format=csv`;
+    const url = `/cruise/csrqry?ship=${ship.join(',')}&crid=${cruiseid}&leader=${leader}&start=${date1}&end=${date2}&append=&format=csv`;
     setDownloadUrl(url);
     
   }, [ship, cruiseid, leader, date1, date2]);
