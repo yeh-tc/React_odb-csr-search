@@ -27,6 +27,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "https://api.odb.ntu.edu.tw",
   "eslintConfig": {
     "extends": [
       "react-app",
