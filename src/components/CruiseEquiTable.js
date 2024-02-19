@@ -40,7 +40,8 @@ export default function CruiseEquiTable({ data }) {
     ].includes(item)
       ? " 浬"
       : item === "掃描式聲納" || item === "水下遙控載具(ROV)" || item === "拖曳式水下攝影系統(Tow Cam)" ||
-        item === "深海拖曳式光纖探測系統(FITS)" || item === "深海拖曳式攝影系統(ATIS)" || item === "自主水下載具(AUV)" || item === "超短基線(USBL)" || item === "漂浮式載台"
+        item === "深海拖曳式攝影系統(ATIS)" || item === "自主水下載具(AUV)" || item === "漂浮式載台" || item === "視訊導引抓斗系統(TVG)" ||
+        item === "深海拖曳式光纖探測系統(FITS)" || item === "超短基線(USBL)"
       ? " 站"
       : item === "航行紀錄資料"
       ? " 時"
