@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Alert from "@mui/material/Alert";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
@@ -82,7 +82,7 @@ function formatDate(date) {
   const year = d.getFullYear();
   return `${year}-${month}-${day}`;
 }
-//const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
+
 //react-query
 function useCruiseData(ship, cruiseid, leader, date1, date2, canFetch) {
   return useQuery(
@@ -122,7 +122,7 @@ export default function QueryForm() {
   const [downloadUrl, setDownloadUrl] = useState("");
   const {data: cruiseData, isLoading, isError,} = useCruiseData(ship, cruiseid, leader, date1, date2, canFetch);
 
-  const checkDates = () => {
+  const checkDates = useCallback(() => {
     const startDate = new Date(date1);
     const endDate = new Date(date2);
 
@@ -135,10 +135,10 @@ export default function QueryForm() {
       setAlertMessage("");
       setCanFetch(true);
     }
-  };
+  },[date1, date2])
   useEffect(() => {
     checkDates();
-  }, [date1, date2]);
+  }, [checkDates]);
 
   useEffect(() => {
     setCanFetch(!(error1 || error2));
