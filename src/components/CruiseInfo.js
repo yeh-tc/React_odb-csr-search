@@ -49,7 +49,7 @@ function formatDateAndTime(isoDateString) {
 
 const useCruiseInfo = (shipName, cruiseID) => {
   return useQuery(["cruiseInfo", shipName, cruiseID], async () => {
-    const response = await fetch(process.env.REACT_APP_API_URL + `/cruise/csrqry/${shipName}/${cruiseID}`);
+    const response = await fetch(process.env.REACT_APP_API_URL + `/${shipName}/${cruiseID}`);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
