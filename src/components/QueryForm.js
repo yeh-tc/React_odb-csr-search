@@ -393,11 +393,11 @@ export default function QueryForm() {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
-            <DialogTitle sx={{ mt: 2 }} id="alert-dialog-title">
-              {"篩選搜尋條件"}
+            <DialogTitle  sx={{ pt:10 }}>
+            篩選搜尋條件
             </DialogTitle>
 
-            <Divider sx={{ my: 2 }} />
+            <Divider sx={{ my: 1 }} />
             <DialogContent>
               <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
                 {renderFilters()}
