@@ -51,7 +51,7 @@ export default function Footer(){
   
       </Box>
               <Box sx={{backgroundColor:'#FFFFFF',py:'10px',textAlign:'center',fontFamily:"'Poppins'"}}>
-              <Typography variant="body2">Copyright ©{year} 海洋學門資料庫-Ocean Data Bank (ODB). All Rights Reserved</Typography>
+              <Typography variant="caption">Copyright ©{year} 海洋學門資料庫-Ocean Data Bank (ODB). All Rights Reserved</Typography>
               </Box>    
               </>
     );

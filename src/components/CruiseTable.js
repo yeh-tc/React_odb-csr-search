@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { Link } from 'react-router-dom';
@@ -192,6 +193,12 @@ function CustomNoRowsOverlay() {
 }
 
 export default function CruiseTable({cruiseData, isLoading }) {
+    const [sortModel, setSortModel] = useState([
+      {
+        field: 'StartDate',
+        sort: 'asc',
+      },
+    ]);
     if (!cruiseData || cruiseData.length === 0) {
         return (
           <Box sx={{'& .super-app-theme--header': {
@@ -236,6 +243,8 @@ export default function CruiseTable({cruiseData, isLoading }) {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
+        sortModel={sortModel}
+        onSortModelChange={(model) => setSortModel(model)}
         disableRowSelectionOnClick
         slots={{ noRowsOverlay: CustomNoRowsOverlay,
           }}
