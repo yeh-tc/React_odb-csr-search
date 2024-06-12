@@ -196,37 +196,30 @@ export default function CruiseTable({cruiseData, isLoading }) {
     const [sortModel, setSortModel] = useState([
       {
         field: 'StartDate',
-        sort: 'asc',
+        sort: 'desc',
       },
     ]);
-    if (!cruiseData || cruiseData.length === 0) {
-        return (
-          <Box sx={{'& .super-app-theme--header': {
-            backgroundColor: 'rgba(219, 235, 250,0.55)',
-          },
-          }}>
-            <DataGrid
-              autoHeight
-              rows={[]}
-              columns={columns}
-              pageSize={5}
-              rowsPerPageOptions={[5]}
-              disableRowSelectionOnClick
-              slots={{ noRowsOverlay: CustomNoRowsOverlay,
-               }}
-              sx={{ '--DataGrid-overlayHeight': '400px' }}
-              loading={isLoading}
-            />
-          </Box>
-        );
-      }
-      return(
-    <Box 
-      sx={{'& .super-app-theme--header': {
+    return(
+      <Box sx={{'& .super-app-theme--header': {
         backgroundColor: 'rgba(219, 235, 250,0.55)',
-      }}}>
-      <DataGrid
-        autoHeight 
+      },
+      height:'60vh'
+      }}>
+      {!cruiseData || cruiseData.length === 0 ?
+         <DataGrid
+         rows={[]}
+         columns={columns}
+         pageSize={5}
+         rowsPerPageOptions={[5]}
+         disableRowSelectionOnClick
+         slots={{ noRowsOverlay: CustomNoRowsOverlay,
+          }}
+          sx={{ '--DataGrid-overlayHeight': '100%' }}
+         loading={isLoading}
+       />
+      :
+        <DataGrid
+         
         rows={cruiseData.map((row, index) => ({
           id: index,
           ShipName: row.CruiseBasicData.ShipName,
@@ -249,6 +242,7 @@ export default function CruiseTable({cruiseData, isLoading }) {
         slots={{ noRowsOverlay: CustomNoRowsOverlay,
           }}
       />
-    </Box>
-  );
+        }
+      </Box>
+    );
 }

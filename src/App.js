@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import Home from './pages/Home';
 import Info from './pages/Info';
 import Search from './pages/Search';
+import Statistic from './pages/Statistic';
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Search />,
+      },
+      {
+        path: "data",
+        element: <Statistic />,
       },
       {
         path: "csr/:csrId",
@@ -44,8 +49,16 @@ let theme = createTheme({
   },
   palette: {
     primary: {
-
       main: '#2789E3',
+    },
+    secondary: {
+      main: '#757575',
+    },
+    Info: {
+      main: '#fd9602',
+    },
+    success: {
+      main: '#EF86F2',
     },
 
   },

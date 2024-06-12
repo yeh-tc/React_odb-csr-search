@@ -11,7 +11,7 @@ export default function Footer(){
           py:1.5,
           borderBottom: "1px solid",
           borderColor: "#E4E4E4",
-          backgroundColor:'#F8FaFC',
+          backgroundColor:'#fafafa',
           width: '100%',
         }}
       >

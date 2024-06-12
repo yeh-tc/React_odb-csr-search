@@ -92,6 +92,7 @@ function useCruiseData(ship, cruiseid, leader, date1, date2, canFetch) {
         return { data: [], canFetch: false };
       }
       const response = await fetch(process.env.REACT_APP_API_URL + `?ship=${ship}&crid=${cruiseid}&leader=${leader}&start=${date1}&end=${date2}&append=`
+
       );
       
       if (!response.ok) {
@@ -343,13 +344,13 @@ export default function QueryForm() {
   return (
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Typography variant="h5" sx={{ fontWeight: 500, color: "##71A1C" }}>
+        <Typography variant="h5" sx={{ fontWeight: 500, color: "#71A1C" }}>
           查詢探測報告
         </Typography>
         <Button
           startIcon={<DownloadRoundedIcon />}
           href={downloadUrl}
-          size="small"
+          size="medium"
           variant="outlined"
           sx={{
             color: "#2789E3",
@@ -374,13 +375,13 @@ export default function QueryForm() {
         >
           <Button
             startIcon={<TuneIcon />}
-            size="small"
+            size="medium"
             variant="outlined"
             onClick={toggleFilter}
             sx={{
               color: "#2789E3",
               marginLeft: "auto",
-              px: 2.9,
+              px: 3.8,
             }}
           >
             篩選
@@ -432,7 +433,7 @@ export default function QueryForm() {
             paddingBottom: { sm: 3, md: 3.5, lg: 4 },
             display: { xs: "none", sm: "grid" },
             flexWrap: "wrap",
-            gap: 1.5,
+            gap: {sm:2.5, md:3.5, lg:4},
             gridTemplateColumns: {
               xs: "repeat(auto-fill, minmax(300px, 1fr))",
               sm: "repeat(2, minmax(20px, 1fr))",

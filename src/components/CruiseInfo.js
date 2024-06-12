@@ -24,14 +24,25 @@ import NTOUlogo from "../assets/ntoulogo.gif";
 import Sinicalogo from "../assets/sinica.png";
 import NCKUlogo from "../assets/ncku.png";
 import NTNUlogo from "../assets/NTNU.png";
-import NAMRlogo from "../assets/NAMR.svg";
+import NAMRlogo from "../assets/NAMR.png";
 import DWUlogo from "../assets/DWU.jpg";
 import NTUElogo from "../assets/NTUE.png";
-import cwalogo from "../assets/cwa.svg";
+import cwalogo from "../assets/cwa.png";
 import MElogo from "../assets/ME.png";
 import dhlogo from "../assets/NDHU.png";
 import nmnslogo from "../assets/NMNS.png";
-import NCHUlogo from "../assets/NCHU.png"
+import NCHUlogo from "../assets/NCHU.png";
+import TEPtechlogo from "../assets/TPEtech.png";
+import PHlogo from "../assets/ph.png";
+import ChiaYilogo from "../assets/chiayi.png";
+import KSUlogo from "../assets/ksu.png";
+import NUTNlogo from "../assets/nutn.png";
+import OCAlogo from "../assets/Ocalogo.jpg";
+import NMMBAlogo from "../assets/nmmba.png";
+import NPUSTlogo from "../assets/NPUST.png";
+import KHlogo from "../assets/KH.png";
+import TORIlogo from "../assets/tori.png";
+import TOUlogo from "../assets/tou.png";
 
 function formatDateAndTime(isoDateString) {
   if (!isoDateString) return "";
@@ -69,11 +80,17 @@ export default function CruiseInfo({ shipName, cruiseID }) {
       <Box>
         <Typography
           variant="h5"
-          sx={{ fontWeight: 500, color: "#474747", mb: 2 }}
+          sx={{ fontWeight: 500, color: "#71A1C"}}
         >
           Loading...
         </Typography>
-        <RenderError progess />
+        <Typography
+        variant="subtitle1"
+        sx={{ fontWeight: 400, color: "#474747" }}
+        >
+          (以下資料為人工謄填，僅供參考，正確內容請以各船務室書面正本為主)
+        </Typography>
+        <RenderError />
       </Box>
     );
   }
@@ -83,9 +100,15 @@ export default function CruiseInfo({ shipName, cruiseID }) {
       <Box>
         <Typography
           variant="h5"
-          sx={{ fontWeight: 500, color: "#474747", mb: 2 }}
+          sx={{ fontWeight: 500, color: "#71A1C"}}
         >
           資料庫連線異常，請您稍後再試，謝謝 (｡ŏ_ŏ)
+        </Typography>
+        <Typography
+        variant="subtitle1"
+        sx={{ fontWeight: 400, color: "#474747" }}
+        >
+          (以下資料為人工謄填，僅供參考，正確內容請以各船務室書面正本為主)
         </Typography>
         <RenderError />
       </Box>
@@ -96,9 +119,15 @@ export default function CruiseInfo({ shipName, cruiseID }) {
       <Box>
         <Typography
           variant="h5"
-          sx={{ fontWeight: 500, color: "#474747", mb: 2 }}
+          sx={{ fontWeight: 500, color: "#71A1C"}}
         >
           探測報告不存在於資料庫 (｡ŏ_ŏ)
+        </Typography>
+        <Typography
+        variant="subtitle1"
+        sx={{ fontWeight: 400, color: "#474747" }}
+        >
+          (以下資料為人工謄填，僅供參考，正確內容請以各船務室書面正本為主)
         </Typography>
         <RenderError />
       </Box>
@@ -109,7 +138,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
 
   return (
     <Box>
-      <Typography variant="h5" sx={{ fontWeight: 500, color: "##71A1C" }}>
+      <Typography variant="h5" sx={{ fontWeight: 500, color: "#71A1C" }}>
         探測報告表
       </Typography>
       <Typography
@@ -128,7 +157,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
           py: { xs: 2, sm: 4, md: 5 },
         }}
       >
-        <Paper variant="outlined" sx={{ backgroundColor: "#F8FaFC" }}>
+        <Paper variant="outlined" sx={{ backgroundColor: "#fafafa" }}>
           <Box sx={{ mb: 1, px: 2, py: 2 }}>
             <Typography variant="h6" sx={{ fontWeight: 500, color: "#2789E3" }}>
               航次資訊
@@ -260,7 +289,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
             />
           </Box>
         </Paper>
-        <Paper variant="outlined" sx={{ backgroundColor: "#F8FaFC" }}>
+        <Paper variant="outlined" sx={{ backgroundColor: "#fafafa" }}>
           <Box sx={{ mb: 1, px: 2, py: 2 }}>
             <Typography variant="h6" sx={{ fontWeight: 500, color: "#2789E3" }}>
               參與人員
@@ -317,7 +346,8 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                                       department === "中山大學海工系"
                                     ? SYUlogo
                                     : department === "高科大" ||
-                                      department === "國立高雄科技大學"
+                                      department === "國立高雄科技大學" ||
+                                      department === "高雄科技大學"
                                     ? NKUSTlogo
                                     : department === "高師大"
                                     ? NKNUlogo
@@ -344,7 +374,9 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                                     : department === "師大" ||
                                       department === "國立師範大學" ||
                                       department === "師範大學" ||
-                                      department === "台師大"
+                                      department === "台師大" ||
+                                      department === "臺師大" ||
+                                      department === "臺灣師範大學"
                                     ? NTNUlogo
                                     : department === "國海院" ||
                                       department === "國家海洋研究院"
@@ -368,6 +400,38 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                                     ? nmnslogo
                                     : department === "中興大學"
                                     ? NCHUlogo
+                                    : department === "臺北科技大學"
+                                    ? TEPtechlogo
+                                    : department === "澎湖科大" ||
+                                      department === "澎湖科技大學" ||
+                                      department === "澎科大"
+                                    ? PHlogo
+                                    : department === "嘉義大學"
+                                    ? ChiaYilogo
+                                    : department === "崑山大學"
+                                    ? KSUlogo
+                                    : department === "台南大學" ||
+                                      department === "台南大" ||
+                                      department === "臺南大學"
+                                    ? NUTNlogo
+                                    : department === "海保署"
+                                    ? OCAlogo
+                                    : department === "海生館" ||
+                                      department === "國立海洋生物博物館"
+                                    ? NMMBAlogo
+                                    : department === "屏科大" ||
+                                      department === "屏東科技大學"
+                                    ? NPUSTlogo
+                                    : department === "高醫大"
+                                    ? KHlogo
+                                    : department === "TORI" ||
+                                      department === "海洋科技研究中心" ||
+                                      department === "國研院海科中心"
+                                    ? TORIlogo
+                                    : department === "TOU" ||
+                                      department === "臺灣海洋聯盟(TOU)" ||
+                                      department === "臺灣海洋聯盟"
+                                    ? TOUlogo
                                     : undefined
                                 }
                               >
@@ -378,7 +442,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
                               primary={department || ""}
                               secondary={
                                 <Typography
-                                  sx={{ display: "inline", color: "#474747" }}
+                                  sx={{ display: "inline", color: "#474747"}}
                                   component="span"
                                   variant="body2"
                                   color="text.primary"
@@ -402,7 +466,7 @@ export default function CruiseInfo({ shipName, cruiseID }) {
             </Box>
 
         </Paper>
-        <Paper variant="outlined" sx={{ backgroundColor: "#F8FaFC" }}>
+        <Paper variant="outlined" sx={{ backgroundColor: "#fafafa" }}>
           <Box sx={{ mb: 1, px: 2, py: 2 }}>
             <Typography variant="h6" sx={{ fontWeight: 500, color: "#2789E3" }}>
               作業項目

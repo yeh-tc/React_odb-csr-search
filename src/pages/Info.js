@@ -40,7 +40,7 @@ if (splitIds) {
   <Box sx={{
     width: "100%",
   }}>
-  <Typography variant="h5" sx={{ fontWeight: 500, color: "#474747", mb: 2 }}>
+  <Typography variant="h5" sx={{ fontWeight: 500, color: "#71A1C", mb: 2 }}>
     探測報告不存在於資料庫 (｡ŏ_ŏ)
   </Typography>
   <RenderError/>
