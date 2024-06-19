@@ -6,14 +6,16 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
+import Typography from "@mui/material/Typography";
 import CardTemplate from "./CardTemplate";
 import CircularProgress from '@mui/material/CircularProgress';
 import ErrorOutlinedIcon from '@mui/icons-material/ErrorOutlined';
 
 export default function StatisticSkeleton({error}) {
   return (
-    <Grid container spacing={4}>
-      <Grid item xs={12}>
+    <Grid container spacing={5}>
+      <Grid item xs={6} lg={3}>
+      <Box  sx={{ display:'flex',alignItems:'center',gap: 2, height:'100%' }}>
         <FormControl variant="standard" sx={{ m: 1, minWidth: 150 }}>
           <Select
             disabled
@@ -23,33 +25,36 @@ export default function StatisticSkeleton({error}) {
             sx={{
               fontFamily: "Montserrat",
               fontWeight: 500,
-              fontSize: "2.6rem",
+              fontSize: {xs:'28px',sm:'30px',md:'30px',lg:'32px',xl:'2.6rem'},
             }}
-          ></Select>
+          >   
+        </Select>
         </FormControl>
+        <Typography sx={{fontSize: "1.2rem"}}>年</Typography>
+        </Box>
       </Grid>
 
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12} sm={6} lg={3}>
         <CardTemplate
-          ship={"OR1"}
+          ship={"NOR1"}
           number={"0"}
           color="#2789E3"
           loading={true}
           people={error ? "!":"?"}
         />
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12} sm={6} lg={3}>
         <CardTemplate
-          ship={"OR2"}
+          ship={"NOR2"}
           number={"0"}
           color="#fd9602"
           loading={true}
           people={error ? "!":"?"}
         />
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12} sm={6} lg={3}>
         <CardTemplate
-          ship={"OR3"}
+          ship={"NOR3"}
           number={"0"}
           color="#EF6C8F"
           loading={true}

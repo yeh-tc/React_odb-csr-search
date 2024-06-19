@@ -6,9 +6,10 @@ import ODBlogo from "../assets/ODB.png";
 import IconButton from '@mui/material/IconButton';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import { Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 export default function Header(){
+  const location = useLocation();
     return(
         <Box
         sx={{
@@ -34,14 +35,14 @@ export default function Header(){
           <Stack  direction="row" spacing={1} alignItems="center">
             <Link to={`/`}>
               <Tooltip title="首頁">  
-                <IconButton aria-label="home" sx={{color:'#2789E3',}}>
+                <IconButton aria-label="home" sx={{color:location.pathname === '/' ? '#2789E3' : '#75B7F5', ":hover":{color:'#2789E3'}}}>
                   <HomeRoundedIcon />
                 </IconButton>
               </Tooltip>
             </Link>
             <Link to={`data/`}>
               <Tooltip title="統計資料">  
-                <IconButton aria-label="data" sx={{color:'#2789E3',}}>
+                <IconButton aria-label="data" sx={{color:location.pathname === '/data/' ? '#2789E3' : '#75B7F5', ":hover":{color:'#2789E3'}}}>
                   <BarChartIcon />
                 </IconButton>
               </Tooltip>

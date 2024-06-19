@@ -64,9 +64,9 @@ export default function RenderStatistic() {
       <Typography variant="h5" sx={{ fontWeight: 500, color: "#71A1C", mb: 2 }}>
         探測報告統計資料
       </Typography>
-      <Grid container spacing={4}>
-        <Grid item xs={12}>
-          <Box  sx={{ display:'flex',alignItems:'flex-end',gap: 2 }}>
+      <Grid container spacing={5}>
+        <Grid item xs={6} lg={3}>
+          <Box  sx={{ display:'flex',alignItems:'center',gap: 2, height:'100%' }}>
           <FormControl variant="standard" sx={{ m: 1, minWidth: 150 }}>
             <Select
               id="select-year"
@@ -77,7 +77,7 @@ export default function RenderStatistic() {
               sx={{
                 fontFamily: "Montserrat",
                 fontWeight: 500,
-                fontSize: "2.6rem",
+                fontSize: {xs:'28px',sm:'30px',md:'30px',lg:'32px',xl:'2.6rem'},
               }}
             >
               {years.map((year) => {
@@ -89,7 +89,7 @@ export default function RenderStatistic() {
               })}
             </Select>
           </FormControl>
-          <Typography sx={{fontSize: "1.2rem",}}>年</Typography>
+          <Typography sx={{fontSize: "1.2rem"}}>年</Typography>
           </Box>
         </Grid>
         <RenderCards data={statisticData} year={year}/>

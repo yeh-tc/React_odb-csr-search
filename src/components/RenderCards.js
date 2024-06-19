@@ -27,13 +27,13 @@ export default function RenderCards({data, year}){
     },[data,year])
     return(
       <>
-       <Grid item xs={12} md={4}>
+       <Grid item xs={12} sm={6} lg={3}>
           <CardTemplate ship={ year < 2020 ? "OR1" : "NOR1"} number={or1Num.toString()} color="#2789E3" loading={false } people={or1PeopleNum}/>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} sm={6} lg={3} >
           <CardTemplate ship={ year < 2020 ? "OR2" : "NOR2"} number={or2Num.toString()} color='#fd9602' loading={false} people={or2PeopleNum}/>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} sm={6} lg={3} >
           <CardTemplate ship={ year < 2020 ? "OR3" : "NOR3"} number={or3Num.toString()} color="#EF6C8F" loading={false} people={or3PeopleNum}/>
         </Grid>
       </>

@@ -5,7 +5,6 @@ export default function ChartTemplate ({data,color}){
     const categories = data.map(dept=>dept[0])
     const counts = data.map(dept => dept[1]);
     const total = counts.reduce((acc, curr) => acc + curr, 0);
-    console.log(data.length)
     const options = {
         chart: {
             fontFamily: '"Noto Sans TC", sans-serif',
